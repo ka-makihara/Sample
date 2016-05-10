@@ -173,7 +173,9 @@ def proc_sequence(jobPath, elem):
 #
 #
 def convert_job(jobPath):
+	#ｶﾚﾝﾄﾌｫﾙﾀﾞ(作業ﾌｫﾙﾀﾞ)をJOBのﾌｫﾙﾀﾞへ
 	os.chdir(jobPath)
+
 	#ｱﾙｺﾞﾘｽﾞﾑﾗｲﾌﾞﾗﾘのﾊﾟｽを import の検索ﾊﾟｽに追加
 	sys.path.append(jobPath + '\\..\\..\\algo')
 
@@ -198,7 +200,8 @@ def convert_job(jobPath):
 		elif et.tag == 'sequenceGroup':
 			proc_sequence(jobPath,et)
 
-	write_xml("f:\\test.xml",root)
+	out_job = jobPath + '\\JOB_conv.xml'
+	write_xml(out_job,root)
 
 #
 # 指定されたJOBﾌｫﾙﾀﾞの中身を全て新規ﾌｫﾙﾀﾞへｺﾋﾟｰする

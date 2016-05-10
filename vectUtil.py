@@ -1,4 +1,5 @@
 #-*- coding: UTF-8 -*-
+
 u"""画像ﾌｧｲﾙから焼成用ﾍﾞｸﾄﾙﾃﾞｰﾀを生成する
 	画像に対して、焼成幅以上を「膜」画像として分離する
 	元画像から「膜」画像を引いたものを「線分」画像とする。
@@ -95,10 +96,12 @@ def group_vec(group, burnRange, yLen, pixelLen):
 	 """
 	vec_list = []
 
+	x_list = sorted(group, key=lambda x: x.x1)
+
 	#y座標(top)の降順でｿｰﾄ
 	y_list = sorted(group, key=lambda y: y.y2, reverse=True)
 
-	xStart = group[0].left(pixelLen)
+	xStart = x_list[0].left(pixelLen)
 	xEnd = group[-1].right(pixelLen)
 	vecCnt = int((xEnd - xStart) / burnRange) + 1
 	br = burnRange / 2
@@ -149,12 +152,14 @@ def group_vec2(group, burnRange, yLen, pixelLen):
   	"""
 	vec_list = []
 
+	#x座標(left)の昇順でｿｰﾄ
+	x_list = sorted(group, key=lambda x: x.x1)
 	#y座標(bottom)の降順でｿｰﾄ
 	y_list = sorted(group, key=lambda y: y.y2, reverse=True)
 
-	xStart = group[0].left(pixelLen) + burnRange / 2.0
+	xStart = x_list[0].left(pixelLen) + burnRange / 2.0
 	xEnd = group[-1].right(pixelLen)
-	vecCnt = int((xEnd - xStart) / burnRange) + 1
+	vecCnt = int((xEnd - x_list[0].left(pixelLen)) / burnRange) + 1
 	yStart = yLen * pixelLen
 	yEnd = y_list[-1].top(pixelLen)
 
@@ -176,7 +181,7 @@ def get_vect_list(imageData,  burnRange=0.60, isDraw=False):
 	"""
 	#膜画像の座標を取得(収縮・膨張により線分除去)
 	cnt = int(burnRange / dottLen / 5) + 1	#収縮・膨張回数
-	rectList, img_tmp = imageUtil.get_film_pos(imageData,cnt, isDraw=False)
+	rectList, img_tmp = imageUtil.get_film_pos(imageData,cnt, isDraw=isDraw)
 
 	img_height, img_width = imageData.shape[:2]
 	img_src = img_tmp.copy()
@@ -232,7 +237,7 @@ def get_vect_list(imageData,  burnRange=0.60, isDraw=False):
 
 	return film_vect,line_vect 
 
-def create_vect_file(imageFile, burnRange=0.60, offsetX=0.0, offsetY=0.0):
+def create_vect_file(imageFile, burnRange=0.60, offsetX=0.0, offsetY=0.0, isDraw=False):
 	u"""[ｲﾒｰｼﾞﾌｧｲﾙよりﾍﾞｸﾄﾙﾃﾞｰﾀﾌｧｲﾙを生成する]
 		imageFile: ﾍﾞｸﾄﾙﾃﾞｰﾀを生成する元画像ﾌｧｲﾙ名
 		burnRange: 焼成幅(mm)
@@ -250,7 +255,7 @@ def create_vect_file(imageFile, burnRange=0.60, offsetX=0.0, offsetY=0.0):
 	#画像ﾃﾞｰﾀ取得
 	img_src = imageUtil.get_image_array(imageFile)
 
-	film_vect, line_vect = get_vect_list(img_src,burnRange,isDraw=False)
+	film_vect, line_vect = get_vect_list(img_src,burnRange,isDraw=isDraw)
 
 	if len(film_vect) == 0 and len(line_vect) == 0:
 		return False
@@ -291,10 +296,19 @@ if __name__ == '__main__':
 	param = sys.argv
 
 	if len(param) < 2:
-		print 'usage: {0} <file>'.format(param[0])
+		print 'usage: {0} <imageFile>'.format(param[0])
 		exit(0)
+
+	img_path = os.path.dirname( param[1] )
+
+	mcmUtil.init_mcm_util( img_path )
 
 	img_src = imageUtil.get_image_array( param[1] )
 
-	get_vect_list(img_src,burnRange=0.60,isDraw=True)
-	#create_vect_file('f:\\dummy.vect',imageFile=param[1])
+	#film_vect, line_vect = get_vect_list(img_src,burnRange=0.60,isDraw=True)
+
+	create_vect_file(imageFile=param[1], isDraw=True)
+
+	from ctypes import *
+	user32 = windll.user32
+	user32.MessageBoxW(0,u"ﾍﾞｸﾄﾙﾌｧｲﾙを生成しました",u"vect",0x40)

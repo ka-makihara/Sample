@@ -2,6 +2,7 @@
 u"""MCで使用する数値計算用ﾗｲﾌﾞﾗﾘ
 """
 
+import os
 import math
 import xml.etree.ElementTree as ET
 
@@ -18,8 +19,14 @@ def init_mcm_util(jobPath):
 	"""
 	global job_tree, job_root, job_path
 	job_path = jobPath
-	job_tree = ET.parse(jobPath + '\\JOB.xml')
-	job_root = job_tree.getroot()
+
+	if os.path.exists(jobPath + '\\JOB.xml') == True:
+		job_tree = ET.parse(jobPath + '\\JOB.xml')
+		job_root = job_tree.getroot()
+	else:
+		job_tree = None
+		job_root = None
+
 	#root[0].tag == 'allShapeObject'
 	#root[1].tag == 'instrumentGroup'
 	#root[2].tag == 'materialGroup'
@@ -30,6 +37,9 @@ def get_job_data(tagName):
 		'materialGroup/materialData/maxX' のように / で区切る
 		※予め init_mcm_util(jobPath) を実行しておくこと
 	"""
+	if job_root == None:
+		return None
+
 	obj = job_root.find(tagName)
 	if obj == None:
 		return None
@@ -42,41 +52,41 @@ def get_job_path():
 	return job_path
 
 
-def get_baking_time(layerNo):
+def get_baking_time(resinNum):
 	u"""[ﾍﾞｲｷﾝｸﾞ時間(tb:TimeBaking)の取得]
-		layerNo : ﾚｲﾔｰ番号
+		resinNum : 樹脂積層数
 	"""
-	tm = -79.01 * math.log(layerNo) + 308.92
+	tm = -79.01 * math.log(resinNum) + 308.92
 	if tm < 0.0:
 		return 0
 	else:
 		return int(tm * 1000)
 
-def get_baking_wait(layerNo):
+def get_baking_wait(resinNum):
 	u"""[ﾍﾞｲｷﾝｸﾞ待ち時間(tbw:TimeBakingWait)の取得]
-		layerNo : ﾚｲﾔｰ番号
+		resinNum : 樹脂積層数
 	"""
-	tm = 11.427 * math.log(layerNo) - 13.323
+	tm = 11.427 * math.log(resinNum) - 13.323
 	if tm < 0.0:
 		return 0
 	else:
 		return int(tm * 1000)
 
-def get_dry_time(layerNo):
+def get_dry_time(resinNum):
 	u"""[乾燥時間(td:TimeDry)の取得]
-		layerNo : ﾚｲﾔｰ番号
+		resinNum : 樹脂積層数
 	"""
-	tm = 47.637 / layerNo - 0.3791
+	tm = 47.637 / resinNum - 0.3791
 	if tm < 0.0:
 		return 0
 	else:
 		return int(tm * 1000)
 
-def get_print_wait(layerNo):
+def get_print_wait(resinNum):
 	u"""[印刷待ち時間(tpw:TimePrintWait)の取得]
-		layerNo : ﾚｲﾔｰ番号
+		resinNum : 樹脂積層数
 	"""
-	tm = 8.9351 * math.log(layerNo) - 12.548
+	tm = 8.9351 * math.log(resinNum) - 12.548
 	if tm < 0.0:
 		return 0
 	else:

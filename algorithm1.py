@@ -135,7 +135,7 @@ def func1(layerNo=1, materialName="", imageFile="", originZ=0.000, blockX=4 ,blo
 
 	elm_list = []
 	#指定ﾌﾞﾛｯｸ数で画像分割
-	#imgFiles = jobUtil.split_image(blockX,blockY,imageFile)
+	imgFiles = jobUtil.split_image(blockX,blockY,imageFile)
 
 	subNo = 0
 	elm_list.extend( layer_print(layerNo,subNo,materialName,imageFile,originZ + 0.000,0,len(image_table)) )
@@ -153,4 +153,4 @@ def func1(layerNo=1, materialName="", imageFile="", originZ=0.000, blockX=4 ,blo
 #
 #
 if __name__ == '__main__':
-	func1(u"日本語",u"bbb")
+	func1(1,materialName=u"日本語",imageFile="bbb.png")
