@@ -17,11 +17,14 @@ from PIL import Image
 
 import vecUtil
 
+font_prop = matplotlib.font_manager.FontProperties(fname="c:\\Windows\\Fonts\\msgothic.ttc")
+
+
 params = {	'xtick.labelsize':30,
 			'ytick.labelsize':30
 		}
 
-dottLen = 0.042333
+dottLen = 0.0423333
 #offsetX = 81.5334
 #offsetY = 72.0508
 #offsetX = 90.0
@@ -298,7 +301,7 @@ class CanvasPanel(wx.Panel):
 				self.im=Image.open(file)
 				self.im_list=array(self.im)
 
-				self.figure.suptitle(file,fontsize=40)
+				self.figure.suptitle(os.path.basename(file),fontsize=40,fontdict={"fontproperties":font_prop,"fontsize":40})
 				self.remove_vect()
 				self.draw()
 				self.canvas.draw()

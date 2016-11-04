@@ -60,6 +60,8 @@ def drawLine(img,start,end,col,thin=1):
 def destroyAllWindows():
 	cv2.destroyAllWindows()
 
+def image_save(file, img):
+	cv2.imwrite(file,img)
 #
 # mm座標をﾋﾟｸｾﾙ座標に変換
 #
@@ -214,11 +216,11 @@ def search_horizontal(img, yy, xx):
 	"""
 	height,width = img.shape[:2]
 
-	ww = 0
+	ww = 1
 	for n in range(xx,width):
 		data = [img.item(yy,n,0),img.item(yy,n,1),img.item(yy,n,2)]
 		if all([x < 200 for x in data]):
-			if ww < 3:
+			if ww < 2:
 				return 0
 			return ww
 		ww += 1
@@ -234,11 +236,11 @@ def search_vertical(img, yy,xx):
 	"""
 	height,width = img.shape[:2]
 
-	ww = 0
+	ww = 1
 	for n in range(yy,height):
 		data = [img.item(n,xx,0),img.item(n,xx,1),img.item(n,xx,2)]
 		if all([x < 200 for x in data]):
-			if ww < 3:
+			if ww < 2:
 				return 0
 			return ww
 		ww += 1
@@ -380,7 +382,7 @@ def horizontal_search(img, pixelLen):
 			if all([x > 200 for x in data]):
 				ww = search_horizontal(img,yy,xx+1)
 				if ww > 0:
-					line_pos_h.append( (xx,height-yy,xx+ww,height-yy) )
+					line_pos_h.append( (xx,height-yy,xx+ww+3,height-yy) )
 
 					#見つけたﾗｲﾝは消去(3ﾋﾟｸｾﾙ幅+前後3ﾋﾟｸｾﾙ延長)
 					cv2.line(img,(xx-3,yy),(xx+ww+3,yy),(0,0,0),1)
@@ -415,6 +417,7 @@ def vertical_search(img, pixelLen):
 	"""
 	height,width = img.shape[:2]
 
+	#height -= 1
 	#縦ﾗｲﾝを検索
 	line_pos_v = []
 	line_pos = []
@@ -427,7 +430,7 @@ def vertical_search(img, pixelLen):
 				ww = search_vertical(img,yy+1,xx)
 				if ww > 0:
 					#line_pos_v.append( (xx,height-yy,xx,height-(yy+ww)) )
-					line_pos_v.append( (xx,height-(yy+ww),xx,height-yy) )
+					line_pos_v.append( (xx,height-(yy+ww),xx,height-(yy-3)) )
 
 					#見つけたﾗｲﾝは消去(3ﾋﾟｸｾﾙ幅+上下3ﾋﾟｸｾﾙ延長)
 					cv2.line(img,(xx,yy-3),(xx,yy+ww+3),(0,0,0),1)
@@ -503,10 +506,13 @@ def line_search(img, pixelLen, isDraw=False):
 
 	return line_pos
 
-def get_image_array(imageFile):
+def get_image_array(imageFile, dummyPrintY=100):
 	u"""[ｲﾒｰｼﾞﾌｧｲﾙをｵｰﾌﾟﾝして白黒反転したﾃﾞｰﾀ配列を取得]
 		焼成ﾃﾞｰﾀ画像は焼成部が黒(0,0,0)なので
 		opencv用に「ｵﾌﾞｼﾞｪｸﾄ」(焼成部)を白とするため、反転させる
+
+		  imageFile: 画像ﾌｧｲﾙ名
+		dummyPrintY: 画像上端からの捨て打ち幅(ﾋﾟｸｾﾙ)
 	"""
 	#白黒反転用のﾙｯｸｱｯﾌﾟﾃｰﾌﾞﾙ
 	lookup_tbl = np.ones((256,1),dtype='uint8')
@@ -518,6 +524,11 @@ def get_image_array(imageFile):
 
 	src_im = cv2.imread(imageFile)
 	#src_im = imageData
+	xLen = len(src_im[0]) #画像の横ｻｲｽﾞ
+	fill_data = [[255 for i in range(3)] for j in range(xLen)]
+	for yy in range(dummyPrintY):
+		src_im[yy] = fill_data
+
 
 	#LUT を使用して白黒反転
 	im = cv2.LUT(src_im,lookup_tbl)

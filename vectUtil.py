@@ -19,7 +19,7 @@ import cv2
 
 __version__ = "1.0.0"
 
-dottLen = 0.042333
+dottLen = 0.0423333
 
 def dup_area(areaGroup, pitchX, areaList, img_tmp = None):
 	u"""[検索対象領域からｴﾘｱの重なるものをｸﾞﾙｰﾌﾟ化する]
@@ -67,6 +67,9 @@ def get_area_group(area_list, pixelLen, burnRange, img_tmp = None):
 		   return : [ [rect1,rect2],[rect3,rect4], ... ]
 	"""
 	vecArea = []
+
+	if len(area_list) == 0:
+		return vecArea
 
 	#x1 の座標が小さい(左から)でｿｰﾄ(昇順)する
 	area_list.sort(key=lambda x: x.x1)
@@ -157,9 +160,9 @@ def group_vec2(group, burnRange, yLen, pixelLen):
 	#y座標(bottom)の降順でｿｰﾄ
 	y_list = sorted(group, key=lambda y: y.y2, reverse=True)
 
-	xStart = x_list[0].left(pixelLen) + burnRange / 2.0
-	xEnd = group[-1].right(pixelLen)
-	vecCnt = int((xEnd - x_list[0].left(pixelLen)) / burnRange) + 1
+	xStart = x_list[0].left(pixelLen)
+	xEnd = x_list[-1].right(pixelLen)
+	vecCnt = int((xEnd - xStart) / burnRange) + 1
 	yStart = yLen * pixelLen
 	yEnd = y_list[-1].top(pixelLen)
 
@@ -228,9 +231,15 @@ def get_vect_list(imageData,  burnRange=0.60, isDraw=False):
 	img_tmp = thinning.thinning_Hi(img_tmp)
 	if isDraw == True:
 		imageUtil.image_show('film_view',img_tmp, waitKey=True)
+		#imageUtil.image_save('thin.png',img_tmp)
 
 	#線分ﾍﾞｸﾄﾙの走査
 	line_vect = imageUtil.line_search(img_tmp,dottLen)
+	if isDraw == True:
+		for ln in line_vect:
+			px1,py1,px2,py2 = imageUtil.to_pixel(ln[0],ln[1],ln[2],ln[3],dottLen)
+			imageUtil.drawLine(img_tmp,(px1,img_height-py1),(px2,img_height-py2),imageUtil.COL_RED,1)
+		imageUtil.image_show('film_view',img_tmp, waitKey=True)
 
 	if isDraw == True:
 		imageUtil.destroyAllWindows()
@@ -275,6 +284,16 @@ def create_vect_file(imageFile, burnRange=0.60, offsetX=0.0, offsetY=0.0, isDraw
 			f.write('LISTEND\n')
 		vec_file_film = 'Laser_scan_film_' + name + '.vect'
 
+		#ﾋﾟｸｾﾙ座標確認用
+		'''
+		f1 = mcmUtil.get_job_path() + '\\vector\\Laser_scan_film_' + name.encode('ShiftJIS') + '.txt'
+		with open(f1,'w') as f:
+			for vv in film_vect:
+				px1,py1,px2,py2 = imageUtil.to_pixel(vv[0],vv[1],vv[2],vv[3],dottLen)
+				f.write('({0},{1})-({2},{3})\n'.format(px1,py1,px2,py2))
+		'''
+
+	# 線分ﾍﾞｸﾄﾙ
 	vec_file_line = ""
 	if len(line_vect):
 		vec_file = mcmUtil.get_job_path() + '\\vector\\Laser_scan_line_' + name.encode('ShiftJIS') + '.vect'
@@ -285,8 +304,16 @@ def create_vect_file(imageFile, burnRange=0.60, offsetX=0.0, offsetY=0.0, isDraw
 				f.write('MARK {0:.3f} {1:.3f}\n'.format(vv[2]+offsetX,vv[3]+offsetY))
 
 			f.write('LISTEND\n')
-		#vec_file_line = 'vector\\' + os.path.basename(vec_file)
 		vec_file_line = 'Laser_scan_line_' + name + '.vect'
+
+		#ﾋﾟｸｾﾙ座標確認用
+		'''
+		f2 = mcmUtil.get_job_path() + '\\vector\\Laser_scan_line_' + name.encode('ShiftJIS') + '.txt'
+		with open(f2,'w') as f:
+			for vv in line_vect:
+				px1,py1,px2,py2 = imageUtil.to_pixel(vv[0],vv[1],vv[2],vv[3],dottLen)
+				f.write('({0},{1})-({2},{3})\n'.format(px1,py1,px2,py2))
+		'''
 
 	return vec_file_film, vec_file_line
 #
@@ -301,13 +328,20 @@ if __name__ == '__main__':
 
 	img_path = os.path.dirname( param[1] )
 
-	mcmUtil.init_mcm_util( img_path )
+	exePath = os.path.dirname(param[0])
+	if exePath == "":
+		exePath = os.getcwd()
 
-	img_src = imageUtil.get_image_array( param[1] )
+	os.chdir(img_path)
+
+	mcmUtil.init_mcm_util( img_path,exePath )
+
+	#img_src = imageUtil.get_image_array( param[1] )
 
 	#film_vect, line_vect = get_vect_list(img_src,burnRange=0.60,isDraw=True)
-
-	create_vect_file(imageFile=param[1], isDraw=True)
+	ofx = float( mcmUtil.get_job_data('instrumentGroup/circuitPrinter/offsetX') )
+	ofy = float( mcmUtil.get_job_data('instrumentGroup/circuitPrinter/offsetY') )
+	create_vect_file(imageFile=param[1], isDraw=False,offsetX=ofx,offsetY=ofy)
 
 	from ctypes import *
 	user32 = windll.user32

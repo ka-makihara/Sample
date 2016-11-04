@@ -4,34 +4,37 @@
 #
 # Author:      makihara
 #
-# Created:     21/12/2015
-# Copyright:   (c) makihara 2015
+# Created:     04/11/2016
+# Copyright:   (c) makihara 2016
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
-data1=[
-[(0,0),(1,0),(2,0)],
-[(0,1),(1,1),(2,1)],
-[(0,3),(1,3),(2,3)],
-[(0,4),(1,4),(2,4)]
-]
-
-data2=[
-[(0,0),(1,0),(2,0)],
-[(0,1),(1,1),(2,1)],
-[(0,3),(1,3),(2,3)],
-[(0,4),(1,4),(2,4)]
-]
+import os
+import imageUtil
+from PIL import Image
 
 def main():
-    pass
-    yL = len(data1)
-    xL = len(data1[0])
+	os.chdir('f:\\source\\jobConverter')
+	img = Image.open("1-f.png")
 
-    sub = [[(data1[b][a][0]+data2[b][a][0], data1[b][a][1]+data2[b][a][1]) for a in range(xL)] for b in range(yL)]
-    print sub
+	xs = img.size[0]
+	ys = img.size[1]
+	tmp = Image.new('L',img.size,(255,255,255))
 
-    mm = map(lambda x,y:(x,y),data1,data2)
-    print mm
+	data = img.load()
+	fill_data = [[255 for i in range(3)] for j in range(img.size[0])]
+	for yy in range(100):
+		data[0,yy] = fill_data
+
+	pix = tmp.load()
+	for yy in range(img.size[1]):
+		for xx in range(img.size[0]):
+			col = data[xx,yy]
+			if col == 255:
+				pix[xx,yy] = 0
+			else:
+				pix[xx,yy] = 255
+
+	tmp.save('dummy.png')
 
 if __name__ == '__main__':
-    main()
+	main()

@@ -11,14 +11,30 @@ import importlib	#ﾓｼﾞｭｰﾙの動的ﾛｰﾄﾞ
 import inspect		#ﾓｼﾞｭｰﾙ内の関数検索
 import subprocess
 
-import xml.dom.minidom
+import xml.dom.minidom as dom
 import xml.etree.ElementTree as ET
 
 import glob		# for ﾌｧｲﾙ一覧用
 
 import mcmUtil
 
+from ctypes import *
+
 __version__ = "1.0.0"
+
+user32 = windll.user32
+
+#ﾒｯｾｰｼﾞﾎﾞｯｸｽ定義
+MB_OK = 0
+MB_OKCANCEL = 1
+MB_ABORTRETRYIGNORE = 2
+MB_YESNOCANCEL = 3
+MB_YESNO = 4
+MB_RETRYCANCEL = 5
+MB_ICONSTOP = 16
+MB_ICONQUESTION = 32
+MB_ICONEXCLAMATION = 48
+MB_ICONINFORMATION = 64
 
 #
 # 文字列が数値かどうか判定する
@@ -36,8 +52,8 @@ def is_digit(str):
 
 def prettify(elem):
     rought_string = ET.tostring(elem,'utf-8')
-    reparsed = minidom.parseString(rought_string)
-    return reparsed.toprettyxml(indent=" ")
+    reparsed = dom.parseString(rought_string)
+    return reparsed.toprettyxml(indent=" ",newl="\r\n")
 
 #
 # 文字列のparam を 数値、文字列に分けて戻り値とする
@@ -77,12 +93,16 @@ def write_xml(f,elem):
 	tree = ET.ElementTree(elem)
 
 	tree.write(f,encoding='utf-8',xml_declaration=True)
-	'''
-	doc = ET.tostring(elem,encoding='utf-8')
+	
+	#Windowsﾒﾓ帳で読めるように改行ｺｰﾄﾞを '\n' --> '\r\n' にする
+	fd = open(f)
+	all_file = fd.read()
+	fd.close()
+	all_file.replace('\n','\r\n')
 
-	with open(f,'w') as f:
-		f.write(doc)
-	'''
+	fd = open(f,"w")
+	fd.write(all_file)
+	fd.close()
 
 def default_func():
 	pass
@@ -131,8 +151,10 @@ def algorithm_command(jobPath,cmd_elem,params, seq_elem, idx):
 
 		#func = getattr(module,funcName,default_func)
 		func = getattr(module,funcName)
-	except:
+	except Exception as e:
 		#関数が見つからない
+		msg = e.message + "\n" + u"ﾓｼﾞｭｰﾙ:" + fileName + u"のﾛｰﾄﾞに失敗しました"
+		user32.MessageBoxW(0,msg,"JOB変換",0x40)
 		return
 
 	for tag in cmd_elem:
@@ -140,6 +162,7 @@ def algorithm_command(jobPath,cmd_elem,params, seq_elem, idx):
 			#parameter ﾀｸﾞの属性値を取得(関数ﾊﾟﾗﾒｰﾀの取得)
 			argDict = create_arg_dict( tag.items() )
 
+			print 'convert:{0}-{1}'.format(module.__file__,funcName)
 			#関数呼び出し
 			elm_str = func(**argDict)
 			add_elements(seq_elem,idx,elm_str)
@@ -172,14 +195,17 @@ def proc_sequence(jobPath, elem):
 #
 #
 #
-def convert_job(jobPath):
+def convert_job(jobPath,exePath):
+	cwd = os.getcwd()
 	#ｶﾚﾝﾄﾌｫﾙﾀﾞ(作業ﾌｫﾙﾀﾞ)をJOBのﾌｫﾙﾀﾞへ
 	os.chdir(jobPath)
 
 	#ｱﾙｺﾞﾘｽﾞﾑﾗｲﾌﾞﾗﾘのﾊﾟｽを import の検索ﾊﾟｽに追加
 	sys.path.append(jobPath + '\\..\\..\\algo')
+	sys.path.append(exePath)
+	sys.path.append(exePath + '\\algo')
 
-	mcmUtil.init_mcm_util(jobPath)
+	mcmUtil.init_mcm_util(jobPath,exePath)
 
 	#JOB.xml の読み込み
 	tree = ET.parse(jobPath + '\\JOB.xml')
@@ -200,40 +226,54 @@ def convert_job(jobPath):
 		elif et.tag == 'sequenceGroup':
 			proc_sequence(jobPath,et)
 
-	out_job = jobPath + '\\JOB_conv.xml'
+	out_job = jobPath + '\\JOB.xml'
 	write_xml(out_job,root)
 
 #
 # 指定されたJOBﾌｫﾙﾀﾞの中身を全て新規ﾌｫﾙﾀﾞへｺﾋﾟｰする
-#  ※ただし、JOC.xml のみは削除する
 #
 def copy_job(jobPath):
 
 	#JOBﾌｫﾙﾀﾞのｺﾋﾟｰを生成する(ﾌｫﾙﾀﾞ名+_xxx, とりあえず100まであれば)
 	for nn in range(100):
-		if os.path.exists(jobPath + '_'+ str(nn)) == False:
+		if os.path.exists(jobPath + '_conv_'+ str(nn)) == False:
 			break
 
 	#ｺﾋﾟｰ先ﾌｫﾙﾀﾞ名
-	newPath = jobPath + '_' + str(nn)
+	newPath = jobPath + '_conv_' + str(nn)
 
 	#ﾌｫﾙﾀﾞｺﾋﾟｰ
 	shutil.copytree(jobPath,newPath)
 
 	#JOB.xml のみ削除
-	if os.path.exists(newPath + '\\JOB.xml') == True:
-		os.remove(newPath + '\\JOB.xml')
+	#if os.path.exists(newPath + '\\JOB.xml') == True:
+	#	os.remove(newPath + '\\JOB.xml')
 
+	return newPath
 #
 #
 #
 if __name__ == '__main__':
 	args = sys.argv
 
+	#from ctypes import *
+	#user32 = windll.user32
+
 	if len(sys.argv) == 1:
 		#引数にJOBﾌｫﾙﾀﾞが指定されていない
+		user32.MessageBoxW(0,u"引数にJOBﾌｫﾙﾀﾞを指定してください",u"引数ｴﾗｰ",(MB_OK | MB_ICONSTOP))
 		print 'usage: jobConv <JOB Folder>'
 
 	else:
-		#copy_job(args[1])
-		convert_job(args[1])
+		exePath = os.path.dirname(args[0])
+		if exePath == "":
+			exePath = os.getcwd()
+
+		try:
+			newPath = copy_job(args[1])
+			convert_job(newPath,exePath)
+			user32.MessageBoxW(0,u"JOB変換完了",u"JOB変換",(MB_OK | MB_ICONINFORMATION))
+		except:
+			user32.MessageBoxW(0,u"JOB変換エラー",u"JOB変換",(MB_OK | MB_ICONSTOP))
+
+

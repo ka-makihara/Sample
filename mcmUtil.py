@@ -13,12 +13,14 @@ job_tree = None
 job_root = None
 cfg_tree = None
 cfg_root = None
+exe_path = None
 
-def init_mcm_util(jobPath):
+def init_mcm_util(jobPath,exePath):
 	u"""[MCM の設定情報を取得するためのﾕｰﾃｨﾘﾃｨ初期化]
 	"""
-	global job_tree, job_root, job_path
+	global job_tree, job_root, job_path, exe_path
 	job_path = jobPath
+	exe_path = exePath
 
 	if os.path.exists(jobPath + '\\JOB.xml') == True:
 		job_tree = ET.parse(jobPath + '\\JOB.xml')
@@ -31,6 +33,19 @@ def init_mcm_util(jobPath):
 	#root[1].tag == 'instrumentGroup'
 	#root[2].tag == 'materialGroup'
 	#root[3].tag == 'sequenceGroup'
+
+def get_exe_path():
+	return exe_path
+
+def get_job_element(tagName):
+	if job_root == None:
+		return None
+
+	obj = job_root.find(tagName)
+	if obj == None:
+		return None
+
+	return obj
 
 def get_job_data(tagName):
 	u"""[JOBﾃﾞｰﾀからﾀｸﾞのﾃﾞｰﾀ値を取得する]
