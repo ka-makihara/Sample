@@ -18,6 +18,11 @@ __version__ = "1.0.0"
 
 __dottLingth = 0.0423333	#1ﾄﾞｯﾄの大きさ
 
+# 膨張・収縮用ﾏｽｸﾃﾞｰﾀ
+neg8 = np.array([[1,1,1],
+				 [1,1,1],
+				 [1,1,1]],np.uint8)
+
 def exist_parts(job_parts, mount_parts):
 	u'''JOBの中に埋め込むﾊﾟｰﾂの定義があるか確認する
 		  job_parts: JOBに記述されたﾊﾟｰﾂﾘｽﾄ
@@ -74,6 +79,7 @@ def embedded(layerNo=1, imageFile, mountFile, sectionName, blockX=4, blockY=4):
 	#ｸﾞﾚｰｽｹｰﾙの画像ﾃﾞｰﾀを生成する
 	tmp_img = Image.new('L',img.size,(255,255,255))
 
+	#ｷｬﾋﾞﾃｨ画像(白抜き画像)に対して、接着用画像は白黒逆転させる
 	pix2 = tmp_img.load()
 	for yy in range( img.size[1] ):
 		for xx in range( img.size[0] ):
@@ -85,4 +91,10 @@ def embedded(layerNo=1, imageFile, mountFile, sectionName, blockX=4, blockY=4):
 	d_img = mcmUtil.get_job_path() * '\\image\\d_img.png'
 	tmp_img.save( d_img )
 
-	
+	src_img = cv2.imread(d_img)
+	#画像ﾃﾞｰﾀ
+	img_tmp = src_img.copy()
+
+	#収縮
+	for nn in range(3):
+		img_tmp = cv2.erode(img_tmp,neg8,iterations=1)
