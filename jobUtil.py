@@ -31,6 +31,8 @@ burn_cmd_items = ['scanList','materialName','imageOriginX','imageOriginY','image
 
 maintenance_cmd_items = ['target','purgeTime','wipingMode','flushCount','cappingMode']
 
+mount_cmd_items = ['layerNo','partsName','x','y','z','angle','direction','placeOffsetX','placeOffsetY','placeOffsetZ']
+
 def split_image(bx, by, imgFile):
 	u"""[指定されたﾌﾞﾛｯｸ数でｲﾒｰｼﾞﾌｧｲﾙを分割する]
 		   bx : X方向ﾌﾞﾛｯｸ数
@@ -111,25 +113,60 @@ def burn_command(dict):
 def maintenance_command(dict):
 	return create_cmd('maintenanceCommand',maintenance_cmd_items,dict).encode('UTF-8')
 
+def mount_command(dict):
+	return create_cmd('mountCommand',mount_cmd_items,dict).encode('UTF-8')
+
 
 class PartsData:
-	def __init__(self,name, xs=0.0, ys=0.0, hh=0.0):
+	def __init__(self,name, xs=0.0, ys=0.0, hh=0.0, capa=0.0):
 		self.name = name
 		self.x_size = xs 
 		self.y_size = ys
 		self.height = hh
+		self.layerQty = 0
+		self.pathQty = 0
+		self.capacity = capa #体積(ｻｲｽﾞによる計算値ではなく直接設定用)
 
-	def shape(self, xs,ys,h):
-		self.x_size = xs
-		self.y_size = ys
-		self.height = h
+	def size(self):
+		return (self.x_size,self.y_size)
+
+	def left_up(self,center_pos):
+		u''' 指定されたﾊﾟｰﾂ中心(mm)から左上の位置を得る
+		'''
+		return ( center_pos[0]-self.x_size/2.0, center_pos[1]+self.y_size/2.0 )
+
+	def set_print_count(self, layerQty, pathQty):
+		u'''印刷層数とﾊﾟｽ数を設定する
+		'''
+		self.layerQty = layerQty
+		self.pathQty = pathQty
+
+	def get_print_count(self):
+		return (self.layerQty, self.pathQty)
 
 class MountData:
-	def __init__(self,name,xx,yy,rr):
+	def __init__(self,name,xx,yy,rr,zz):
 		self.name = name
 		self.xPos = xx
 		self.yPos = yy
 		self.angle = rr
+		self.zPos = zz
+		self.layerQty = 0
+		self.pathQty = 0
+		self.parts = PartsData(name)
+
+	def position(self, ofx=0.0, ofy=0.0):
+		return (self.xPos-ofx,self.yPos-ofy)
+
+	def set_print_count(self, layerQty, pathQty):
+		self.layerQty = layerQty
+		self.pathQty = pathQty
+
+	def get_print_count(self):
+		return (self.layerQty, self.pathQty)
+
+	def get_total_path(self, layerPath):
+		return self.layerQty * layerPath + self.pathQty
 
 def create_parts(element):
 	name = ""
@@ -167,10 +204,11 @@ def create_parts_list():
 	return parts_list
 
 
-def create_mount_data(posItem):
+def create_mount_data(posItem, ofx=0.0, ofy=0.0):
 	xPos = 0.0
 	yPos = 0.0
 	rPos = 0.0
+	zPos = 0.0
 	name = ""
 
 	for item in posItem:
@@ -185,16 +223,20 @@ def create_mount_data(posItem):
 				yPos = float(data[1])
 			elif data[0].upper() == 'R':
 				rPos = float(data[1])
+			elif data[0].upper() == 'Z':
+				zPos = float(data[1])
 			else:
 				pass
 
-	md = MountData(name,xPos,yPos,rPos)
+	md = MountData(name,xPos-ofx,yPos-ofy,rPos,zPos)
 	return md
 
 
-def create_mount_list(mountFile):
+def create_mount_list(mountFile, ofx=0.0, ofy=0.0):
 	u'''実装ﾃﾞｰﾀﾌｧｲﾙを読み込んでﾘｽﾄ化する
 		mountFile: ﾌｧｲﾙ名
+		ofx:X方向ｵﾌｾｯﾄ
+		ofy:Y方向ｵﾌｾｯﾄ
 
 		[section名]
 			<ﾊﾟｰﾂ名>  X=.... Y=... R=...
@@ -210,6 +252,8 @@ def create_mount_list(mountFile):
 	with open(mountFile) as fd:
 		for ln in fd:
 			ss = ln.strip()
+			if ss[0] == '#':
+				continue
 			if len(ss):
 				if re.match(section,ss):
 					if len(ml) != 0:
@@ -219,7 +263,7 @@ def create_mount_list(mountFile):
 					ml = []
 				else:
 					items = re.findall(pattern,ss)
-					md = create_mount_data(items)
+					md = create_mount_data(items,ofx,ofy)
 					ml.append(md)
 
 		if len(ml) != 0:
