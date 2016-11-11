@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<JOB>
+  <allShapedObject>
+    <comment>積層構造材上 回路材形成評価</comment>
+    <formX>20</formX>
+    <formY>20</formY>
+    <height>0.02</height>
+    <x>0</x>
+    <y>37.5</y>
+    <z>1.35</z>
+  </allShapedObject>
+  <instrumentGroup>
+    <framePrinter>
+      <materialName>構造材1パス</materialName>
+      <offsetX>57.3009</offsetX>
+      <offsetY>35.6555</offsetY>
+      <offsetZ>0</offsetZ>
+      <fireWave>構造材インク吐出波形_40degC_3パルス変形-2_160912newGEN4L</fireWave>
+      <tickWave>default_tick</tickWave>
+      <headTemperature>40</headTemperature>
+      <headTemperatureRange>2</headTemperatureRange>
+      <flushingFrequency>1000</flushingFrequency>
+      <flushingNumber>50</flushingNumber>
+      <ticklingMode>0</ticklingMode>
+      <ticklingFrequency>1000</ticklingFrequency>
+    </framePrinter>
+    <circuitPrinter>
+      <materialName>回路材1パス</materialName>
+      <offsetX>58.9710</offsetX>
+      <offsetY>34.9848</offsetY>
+      <offsetZ>0</offsetZ>
+      <fireWave>回路材インク-NPS-J_吐出波形_37deg</fireWave>
+      <tickWave>default_tick</tickWave>
+      <headTemperature>37</headTemperature>
+      <headTemperatureRange>2</headTemperatureRange>
+      <flushingFrequency>1000</flushingFrequency>
+      <flushingNumber>10</flushingNumber>
+      <ticklingMode>0</ticklingMode>
+      <ticklingFrequency>1000</ticklingFrequency>
+    </circuitPrinter>
+    <frameRoller>
+      <speed>0</speed>
+    </frameRoller>
+    <burningUnit>
+      <offsetX>0</offsetX>
+      <offsetY>0</offsetY>
+      <offsetZ>0</offsetZ>
+    </burningUnit>
+
+
+  </instrumentGroup>
+
+  <materialGroup>
+    <materialData>
+      <materialName>構造材1パス</materialName>
+      <materialType>0</materialType>
+      <thickness>0.0013</thickness>
+      <maxX>180</maxX>
+      <maxY>180</maxY>
+      <printSpeed>500</printSpeed>
+      <resolutionX>150</resolutionX>
+      <resolutionY>150</resolutionY>
+    </materialData>
+    <materialData>
+      <materialName>回路材1パス</materialName>
+      <materialType>1</materialType>
+      <thickness>0.0005</thickness>
+      <maxX>180</maxX>
+      <maxY>180</maxY>
+      <printSpeed>500</printSpeed>
+      <resolutionX>300</resolutionX>
+      <resolutionY>300</resolutionY>
+    </materialData>
+  </materialGroup>
+
+
+
+  <sequenceGroup>
+
+
+16-e_0
+部品固定塗布
+   <maintenanceCommand>
+      <target>0</target>
+      <purgeTime>400</purgeTime>
+      <wipingMode>1</wipingMode>
+      <flushCount>10</flushCount>
+      <cappingMode>0</cappingMode>
+    </maintenanceCommand>
+
+    <printCommand>
+      <layerNo>16</layerNo>
+      <layerSubNo>1</layerSubNo>
+      <layerType>0</layerType>
+      <materialName>構造材1パス</materialName>
+      <printMode>1</printMode>
+      <printImage>image/16-e_0_M0101_B0104.png</printImage>
+      <imageOriginX>0</imageOriginX>
+      <imageOriginY>0</imageOriginY>
+      <imageOriginZ>1.28</imageOriginZ>
+      <offsetX>0</offsetX>
+      <offsetY>0</offsetY>
+      <offsetZ>0</offsetZ>
+      <printSpeed>500</printSpeed>
+      <rollerMode>0</rollerMode>
+      <curingMode>0</curingMode>
+    </printCommand>
+0
+0
+    <printCommand>
+      <layerNo>16</layerNo>
+      <layerSubNo>2</layerSubNo>
+      <layerType>0</layerType>
+      <materialName>構造材1パス</materialName>
+      <printMode>1</printMode>
+      <printImage>image/16-e_0_M0101_B0302.png</printImage>
+      <imageOriginX>0.0846667</imageOriginX>
+      <imageOriginY>0.0846667</imageOriginY>
+      <imageOriginZ>1.28</imageOriginZ>
+      <offsetX>0</offsetX>
+      <offsetY>0</offsetY>
+      <offsetZ>0</offsetZ>
+      <printSpeed>500</printSpeed>
+      <rollerMode>0</rollerMode>
+      <curingMode>0</curingMode>
+    </printCommand>
+
+   <moveCommand>
+      <positionNo>0</positionNo>
+      <offsetX>0</offsetX>
+      <offsetY>0</offsetY>
+      <offsetZ>80</offsetZ>
+      <headRetruction>0</headRetruction>
+      <capping>1</capping>
+    </moveCommand>
+   <maintenanceCommand>
+      <target>0</target>
+      <purgeTime>400</purgeTime>
+      <wipingMode>1</wipingMode>
+      <flushCount>10</flushCount>
+      <cappingMode>1</cappingMode>
+   </maintenanceCommand>
+
+-----------------------------------------------------------------------------------------
+
+
+  </sequenceGroup>
+</JOB>
+

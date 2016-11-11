@@ -1,0 +1,2296 @@
+<?xml version='1.0' encoding='utf-8'?>
+<JOB>
+  <allShapedObject>
+    <comment>積層構造材上 回路材形成評価</comment>
+    <formX>20</formX>
+    <formY>20</formY>
+    <height>0.02</height>
+    <x>0</x>
+    <y>37.5</y>
+    <z>1.2</z>
+  </allShapedObject>
+  <instrumentGroup>
+    <framePrinter>
+      <materialName>構造材1パス</materialName>
+      <offsetX>45.1089</offsetX>
+      <offsetY>35.6555</offsetY>
+      <offsetZ>0</offsetZ>
+      <fireWave>構造材インク吐出波形_40degC_3パルス変形-2_160912newGEN4L</fireWave>
+      <tickWave>default_tick</tickWave>
+      <headTemperature>40</headTemperature>
+      <headTemperatureRange>2</headTemperatureRange>
+      <flushingFrequency>1000</flushingFrequency>
+      <flushingNumber>50</flushingNumber>
+      <ticklingMode>0</ticklingMode>
+      <ticklingFrequency>1000</ticklingFrequency>
+    </framePrinter>
+    <circuitPrinter>
+      <materialName>回路材1パス</materialName>
+      <offsetX>58.9710</offsetX>
+      <offsetY>34.9848</offsetY>
+      <offsetZ>0</offsetZ>
+      <fireWave>回路材インク-NPS-J_吐出波形_37deg</fireWave>
+      <tickWave>default_tick</tickWave>
+      <headTemperature>0</headTemperature>
+      <headTemperatureRange>2</headTemperatureRange>
+      <flushingFrequency>1000</flushingFrequency>
+      <flushingNumber>10</flushingNumber>
+      <ticklingMode>0</ticklingMode>
+      <ticklingFrequency>1000</ticklingFrequency>
+    </circuitPrinter>
+    <frameRoller>
+      <speed>0</speed>
+    </frameRoller>
+    <burningUnit>
+      <offsetX>0</offsetX>
+      <offsetY>0</offsetY>
+      <offsetZ>0</offsetZ>
+    </burningUnit>
+
+       <partSupplyUnit>
+      <unitNo>1</unitNo>
+      <partName>1005R150</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>2</unitNo>
+      <partName>1005R270</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+    
+   <partSupplyUnit>
+      <unitNo>3</unitNo>
+      <partName>1005R680</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>4</unitNo>
+      <partName>1005R10k</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>5</unitNo>
+      <partName>1005R100k</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>6</unitNo>
+      <partName>1005C1p</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>7</unitNo>
+      <partName>1005C15p</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>8</unitNo>
+      <partName>1005C12p</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>9</unitNo>
+      <partName>1005C10n</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>10</unitNo>
+      <partName>1005C100n</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>11</unitNo>
+      <partName>1005C100n</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>12</unitNo>
+      <partName>1005C1uF</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>13</unitNo>
+      <partName>1005ANT2n</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>14</unitNo>
+      <partName>1005L2.4</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>15</unitNo>
+      <partName>1608C100n</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>16</unitNo>
+      <partName>1608C10u</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>17</unitNo>
+      <partName>1608C22u</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>18</unitNo>
+      <partName>1608FL1</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>19</unitNo>
+      <partName>2012L10u</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>20</unitNo>
+      <partName>3215Y32.768k</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>21</unitNo>
+      <partName>3225Y24M</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>22</unitNo>
+      <partName>MPU9250</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+   <partSupplyUnit>
+      <unitNo>23</unitNo>
+      <partName>C2650</partName>
+      <pickPointX>3.75</pickPointX>
+      <pickPointY>3.75</pickPointY>
+      <pickPitchX>6.4</pickPitchX>
+      <pickPitchY>6.4</pickPitchY>
+      <elementNumX>1</elementNumX>
+      <elementNumY>7</elementNumY>
+      <supplyUnitHeight>3.5</supplyUnitHeight>
+      <supplyUnitDepth>0.01</supplyUnitDepth>
+      <direction>0</direction>
+    </partSupplyUnit>
+    
+
+    <nozzleChangeUnit>
+      <unitNo>1</unitNo>
+      <nozzleName>04.10.25C</nozzleName>
+      <nozzleDia>0.4</nozzleDia>
+      <nozzleHeight>47</nozzleHeight>
+    </nozzleChangeUnit>
+    <nozzleChangeUnit>
+      <unitNo>2</unitNo>
+      <nozzleName>F010</nozzleName>
+      <nozzleDia>1</nozzleDia>
+      <nozzleHeight>47</nozzleHeight>
+    </nozzleChangeUnit>
+    <nozzleChangeUnit>
+      <unitNo>3</unitNo>
+      <nozzleName>F013</nozzleName>
+      <nozzleDia>1.3</nozzleDia>
+      <nozzleHeight>47</nozzleHeight>
+    </nozzleChangeUnit>
+  </instrumentGroup>
+  <materialGroup>
+    <materialData>
+      <materialName>構造材1パス</materialName>
+      <materialType>0</materialType>
+      <thickness>0.0013</thickness>
+      <maxX>180</maxX>
+      <maxY>180</maxY>
+      <printSpeed>500</printSpeed>
+      <resolutionX>150</resolutionX>
+      <resolutionY>150</resolutionY>
+    </materialData>
+    <materialData>
+      <materialName>回路材1パス</materialName>
+      <materialType>1</materialType>
+      <thickness>0.0005</thickness>
+      <maxX>180</maxX>
+      <maxY>180</maxY>
+      <printSpeed>500</printSpeed>
+      <resolutionX>300</resolutionX>
+      <resolutionY>300</resolutionY>
+    </materialData>
+   
+       <partsData>
+      <partName>1005R150</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.35</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005R150-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005R150-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005R270</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.35</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005R270-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005R270-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005R680</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.35</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005R680-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005R680-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005R10k</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.35</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005R10k-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005R10k-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005R100k</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.35</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005R100k-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005R100k-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005C1p</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005C1p-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005C1p-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005C15p</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005C15p-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005C15p-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005C12p</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005C12p-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005C12p-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005C10n</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005C10n-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005C10n-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005C100n</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005C100n-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005C100n-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005C100n</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005C100n-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005C100n-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005C1uF</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005C1uF-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005C1uF-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005ANT2n</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005ANT2n-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005ANT2n-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1005L2.4</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1</sizeX>
+      <sizeY>0.5</sizeY>
+      <height>0.5</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1005L2.4-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1005L2.4-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1608C100n</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1.6</sizeX>
+      <sizeY>0.8</sizeY>
+      <height>0.8</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1608C100n-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1608C100n-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1608C10u</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1.6</sizeX>
+      <sizeY>0.8</sizeY>
+      <height>0.8</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1608C10u-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1608C10u-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1608C22u</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1.6</sizeX>
+      <sizeY>0.8</sizeY>
+      <height>0.8</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1608C22u-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1608C22u-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>1608FL1</partName>
+      <nozzleName>04.10.25C</nozzleName>
+      <sizeX>1.6</sizeX>
+      <sizeY>0.8</sizeY>
+      <height>0.8</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>1608FL1-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>1608FL1-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>2012L10u</partName>
+      <nozzleName>F010</nozzleName>
+      <sizeX>2</sizeX>
+      <sizeY>1.2</sizeY>
+      <height>1</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>2012L10u-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>2012L10u-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>3215Y32.768k</partName>
+      <nozzleName>F010</nozzleName>
+      <sizeX>3.2</sizeX>
+      <sizeY>1.5</sizeY>
+      <height>0.9</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>3215Y32.768k-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>3215Y32.768k-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>3225Y24M</partName>
+      <nozzleName>F010</nozzleName>
+      <sizeX>3.2</sizeX>
+      <sizeY>2.5</sizeY>
+      <height>0.6</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>3225Y24M-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>3225Y24M-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>MPU9250</partName>
+      <nozzleName>F013</nozzleName>
+      <sizeX>3</sizeX>
+      <sizeY>3</sizeY>
+      <height>1</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>MPU9250-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>MPU9250-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="1.7" PTPSZBY="1.5" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+    <partsData>
+      <partName>C2650</partName>
+      <nozzleName>F013</nozzleName>
+      <sizeX>7</sizeX>
+      <sizeY>7</sizeY>
+      <height>0.9</height>
+      <pickOffsetX>0</pickOffsetX>
+      <pickOffsetY>0</pickOffsetY>
+      <pickOffsetZ>0</pickOffsetZ>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+      <motionSpeed>50</motionSpeed>
+      <rotationSpeed>200</rotationSpeed>
+      <shapeName>C2650-1</shapeName>
+      <shapeType>0</shapeType>
+      <lighting>4</lighting>
+      <correctMode>3</correctMode>
+      <shapeName2>C2650-2</shapeName2>
+      <shapeType2>0</shapeType2>
+      <shapeData>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="5.15" PTPSZBY="5.15" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData>
+      <shapeData2>
+        <Data_Set Template="VT60_Template" Type="VT">
+          <PARTSHAPE>
+            <GENERIC>
+              <INFORMATION>
+                <BODY- PTPSZBX="sizeX" PTPSZBY="sizeY" PTPMNH="height" PTPTLBX="0.0" PTPTLBY="0.0" PARTHEIGHTTOL="0" PTPFPBC="1"/>
+                <LEAD- PTPVIPL="0"/>
+              </INFORMATION>
+              <PROCESS>
+                <BODY- PTPSZAPL="0.0" PTPVIMZTX="5.00" PTPVIMZTY="5.00"/>
+                <LEAD- PTPTLCL="100" PTPVILCA="0" PTPVILB="0"/>
+                <PINCHECK- PTPVIFPC="0" PTPVIFPL="0" PTPFPX1="0.0" PTPFPY1="0.0" PTPFPX2="0.0" PTPFPY2="0.0" PTPFPALGforBtmMark="4" PTPFPALGforBump="2" PTPFPALG="1" PTPFPCGA="0"/>
+                <VISION- PTPVICVT="60" PTPVINOX="0.0" PTPVINOY="0.0" PTPVIVHO="0.0" AreaSelectShutterSpeed="25" AreaSelectLighting="0" AreaSelectShutterSpeedBump="0" AreaSelectLightingBump="0"/>
+              </PROCESS>
+            </GENERIC>
+          </PARTSHAPE>
+          <ShapeInfo ID_SHAPE_SHAPE="VT60" ID_SHAPE_SIZEX="" ID_SHAPE_SIZEY=""/>
+          <LibraryInfo ID_LIB_FOLDERNAME="" ID_LIB_FILENAME="" ID_LIB_JOBVERSION="0" ID_LIB_LIBVERSION="3" ID_LIB_UPDATE="" ID_LIB_COMMENT=""/>
+        </Data_Set>
+      </shapeData2>
+    </partsData>
+
+
+
+  </materialGroup>
+  <sequenceGroup>
+
+       <mountCommand>
+      <layerNo>1</layerNo>
+      <partName>1005R270</partName>
+      <x>102.614</x>
+      <y>92.878</y>
+      <z>0.77</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+    <mountCommand>
+      <layerNo>2</layerNo>
+      <partName>1005R270</partName>
+      <x>102.614</x>
+      <y>91.778</y>
+      <z>0.77</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+    <mountCommand>
+      <layerNo>3</layerNo>
+      <partName>1005R10k</partName>
+      <x>94.360</x>
+      <y>81.788</y>
+      <z>0.77</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+    <mountCommand>
+      <layerNo>4</layerNo>
+      <partName>1005R10k</partName>
+      <x>94.360</x>
+      <y>80.687</y>
+      <z>0.77</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+    <mountCommand>
+      <layerNo>5</layerNo>
+      <partName>1005R10k</partName>
+      <x>89.577</x>
+      <y>78.994</y>
+      <z>0.77</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+    <mountCommand>
+      <layerNo>6</layerNo>
+      <partName>1005R10k</partName>
+      <x>88.476</x>
+      <y>78.994</y>
+      <z>0.77</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>7</layerNo>
+      <partName>1005R100k</partName>
+      <x>73.915</x>
+      <y>81.957</y>
+      <z>0.77</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>8</layerNo>
+      <partName>1005C1p</partName>
+      <x>95.757</x>
+      <y>98.847</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>9</layerNo>
+      <partName>1005C1p</partName>
+      <x>102.487</x>
+      <y>98.720</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>10</layerNo>
+      <partName>1005C1p</partName>
+      <x>95.757</x>
+      <y>95.207</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>11</layerNo>
+      <partName>1005C15p</partName>
+      <x>92.667</x>
+      <y>95.577</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>12</layerNo>
+      <partName>1005C15p</partName>
+      <x>92.667</x>
+      <y>96.476</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>13</layerNo>
+      <partName>1005C12p</partName>
+      <x>101.260</x>
+      <y>84.878</y>
+      <z>0.56</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>14</layerNo>
+      <partName>1005C12p</partName>
+      <x>96.561</x>
+      <y>85.047</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>15</layerNo>
+      <partName>1005C10n</partName>
+      <x>100.709</x>
+      <y>49.490</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>16</layerNo>
+      <partName>1005C100n</partName>
+      <x>77.047</x>
+      <y>110.657</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+     <mountCommand>
+      <layerNo>17</layerNo>
+      <partName>1005C100n</partName>
+      <x>77.047</x>
+      <y>109.556</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>18</layerNo>
+      <partName>1005C100n</partName>
+      <x>72.899</x>
+      <y>74.169</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>19</layerNo>
+      <partName>1005C100n</partName>
+      <x>100.709</x>
+      <y>48.390</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>20</layerNo>
+      <partName>1005C100n</partName>
+      <x>77.047</x>
+      <y>114.255</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>21</layerNo>
+      <partName>1005C100n</partName>
+      <x>77.047</x>
+      <y>108.456</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>22</layerNo>
+      <partName>1005C100n</partName>
+      <x>93.513</x>
+      <y>104.942</y>
+      <z>0.56</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>23</layerNo>
+      <partName>1005C100n</partName>
+      <x>94.614</x>
+      <y>104.942</y>
+      <z>0.56</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>24</layerNo>
+      <partName>1005C1uF</partName>
+      <x>81.915</x>
+      <y>85.894</y>
+      <z>0.56</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>25</layerNo>
+      <partName>1005ANT2n</partName>
+      <x>102.487</x>
+      <y>99.821</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>26</layerNo>
+      <partName>1005ANT2n</partName>
+      <x>99.355</x>
+      <y>98.043</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>27</layerNo>
+      <partName>1005L2.4</partName>
+      <x>95.757</x>
+      <y>99.948</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>28</layerNo>
+      <partName>1005L2.4</partName>
+      <x>95.757</x>
+      <y>96.307</y>
+      <z>0.56</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>29</layerNo>
+      <partName>1608C100n</partName>
+      <x>97.006</x>
+      <y>42.379</y>
+      <z>0.28</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>30</layerNo>
+      <partName>1608C10u</partName>
+      <x>90.148</x>
+      <y>106.805</y>
+      <z>0.28</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>31</layerNo>
+      <partName>1608C22u</partName>
+      <x>80.582</x>
+      <y>110.742</y>
+      <z>0.28</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>32</layerNo>
+      <partName>1608FL1</partName>
+      <x>85.492</x>
+      <y>110.234</y>
+      <z>0.28</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>33</layerNo>
+      <partName>2012L10u</partName>
+      <x>80.349</x>
+      <y>104.625</y>
+      <z>0.07</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>34</layerNo>
+      <partName>3215Y32.768k</partName>
+      <x>98.043</x>
+      <y>88.582</y>
+      <z>0.21</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>35</layerNo>
+      <partName>3225Y24M</partName>
+      <x>100.540</x>
+      <y>106.403</y>
+      <z>0.49</z>
+      <angle>90</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>36</layerNo>
+      <partName>MPU9250</partName>
+      <x>96.244</x>
+      <y>48.495</y>
+      <z>0.07</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+        <mountCommand>
+      <layerNo>37</layerNo>
+      <partName>C2650</partName>
+      <x>85.111</x>
+      <y>92.773</y>
+      <z>0.21</z>
+      <angle>0</angle>
+      <direction>0</direction>
+      <placeOffsetX>0</placeOffsetX>
+      <placeOffsetY>0</placeOffsetY>
+      <placeOffsetZ>0</placeOffsetZ>
+    </mountCommand>
+
+
+    <moveCommand>
+      <positionNo>0</positionNo>
+      <offsetX>0</offsetX>
+      <offsetY>0</offsetY>
+      <offsetZ>0</offsetZ>
+      <headRetruction>0</headRetruction>
+      <capping>1</capping>
+    </moveCommand>
+
+
+
+  </sequenceGroup>
+</JOB>
