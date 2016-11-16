@@ -260,6 +260,8 @@ def create_multi_parts(mount_list):
 	yLen = mly[-1].yPos - mly[0].yPos
 
 	dir_R = math.atan2(yLen,xLen)
+	margin_x = (len(mount_list) - 1) * (mount_margin[0] * math.cos(dir_R)) * 2
+	margin_y = (len(mount_list) - 1) * (mount_margin[1] * math.sin(dir_R)) * 2
 
 	mount_list.sort(key=lambda x: (x.xPos, x.yPos))
 
@@ -299,14 +301,21 @@ def create_multi_parts(mount_list):
 		yl = RR[1][1] - RR[0][1]
 
 		if xLenSum == 0 and yLenSum == 0:
-			xLenSum = xl + mount_margin[0] * math.cos(dir_R)
-			yLenSum = yl + mount_margin[1] * math.sin(dir_R)
+			#xLenSum = xl + mount_margin[0] * math.cos(dir_R)
+			#yLenSum = yl + mount_margin[1] * math.sin(dir_R)
+			xLenSum = xl
+			yLenSum = yl
 		else:
-			xLenSum += (xl * math.cos(dir_R) + mount_margin[0] * math.cos(dir_R))
-			yLenSum += (yl * math.sin(dir_R) + mount_margin[1] * math.sin(dir_R))
+			#xLenSum += (xl * math.cos(dir_R) + mount_margin[0] * math.cos(dir_R))
+			#yLenSum += (yl * math.sin(dir_R) + mount_margin[1] * math.sin(dir_R))
+			xLenSum += (xl * math.cos(dir_R))
+			yLenSum += (yl * math.sin(dir_R))
 
 		#ﾊﾟｰﾂ体積は各ﾊﾟｰﾂ体積の合計
 		parts_capacity += (md.parts.x_size * md.parts.y_size * md.parts.height)
+
+	xLenSum += margin_x
+	yLenSum += margin_y
 
 	return jobUtil.PartsData("temp",xLenSum,yLenSum,mount_list[0].parts.height,capa=parts_capacity)
 
@@ -326,7 +335,8 @@ def embedded_print_qty(partsData):
 		- resin_img_block * (parts_capacity(partsData) + embedded_slope_capacity(partsData)) * 1000000.0 \
 		/ (resin_dot_qty * resin_path)) \
 		/ (resin_ratio * ( out_dot[0] * out_dot[1] - inner_dot[0] * inner_dot[1]))
-
+ 
+ 	#print 'parts:{0} Qty={1}'.format(partsData.name, ret)
 	return int(ret)
 
 def embedded_print_path(partsData):
@@ -567,14 +577,17 @@ def create_cavity_image(outer_rect, inner_rect):
 
 	return outer_img
 
-def create_embedded_image(fileName, cavity_list, imageSize=(1536,3344)):
+def create_embedded_image(fileName, cavity_dict, imageSize=(1536,3344)):
 	u'''埋め込みﾋﾞｯﾄﾏｯﾌﾟの生成
 	'''
 	files = []
 
+	keyList = sorted(cavity_dict.keys(),reverse=True)
 	canvas = Image.new('L',imageSize,255)
 
-	for key, cavities in cavity_list.items():
+	#for key, cavities in cavity_list.items():
+	for key in keyList:
+		cavities = cavity_dict[key]
 		for cavity in cavities:
 			outer_rect = cavity[0]
 			inner_rect = cavity[1]
@@ -711,7 +724,7 @@ def create_cmd_list(cavity_dict, cureLayer=4):
 			 数値:埋め込みｲﾒｰｼﾞ番号
 			  'C':硬化ｺﾏﾝﾄﾞ
 	'''
-	cmd_list = []
+	#cmd_list = []
 
 	# cavity_dict の ｷｰは(層数,ﾊﾟｽ数)
 	#   (層数,ﾊﾟｽ数)で降順ｿｰﾄしたﾘｽﾄを得る
@@ -719,6 +732,12 @@ def create_cmd_list(cavity_dict, cureLayer=4):
 
 	#最大印刷ﾊﾟｽ = (最大層数       *    40      + ﾊﾟｽ数)
 	totalPath = (keyList[0][0] * resin_path + keyList[0][1])
+
+	cmd_list = [[nn,0] for nn in range(keyList[0][1])]
+	for nn in range(keyList[0][0]):
+		cmd_list += [[nn,0] for nn in range(len(image_table))]
+		cmd_list += [[nn,0] for nn in range(len(image_table))]
+		cmd_list += [[nn,0] for nn in range(len(image_table)/2)]
 
 	curePath = cureLayer * resin_path	#何パス毎に硬化するか
 	cureCount = totalPath / curePath	#硬化回数
@@ -737,6 +756,7 @@ def create_cmd_list(cavity_dict, cureLayer=4):
 	# 'C' = 硬化ｺﾏﾝﾄﾞ
 	cavityCount = len(cavity_dict)
 
+	startIdx = 0
 	for nn in range(cavityCount-1):
 		qty1,path1 = keyList[nn+0]
 		qty2,path2 = keyList[nn+1]
@@ -748,19 +768,24 @@ def create_cmd_list(cavity_dict, cureLayer=4):
 		cnt = curCnt - nxtCnt
 
 		#ﾘｽﾄ生成と追加
-		cmd_list += ([nn] * cnt)	## ex.) ([1] * 3) ===> [1,1,1] の生成
+		#cmd_list += ([nn] * cnt)	## ex.) ([1] * 3) ===> [1,1,1] の生成
+		#ｲﾒｰｼﾞﾌｧｲﾙｲﾝﾃﾞｯｸｽ設定
+		for idx in range(startIdx,cnt+startIdx):
+			cmd_list[idx][1] = nn
+
+		startIdx += cnt
 
 	#最後のｷｬﾋﾞﾃｨｲﾒｰｼﾞ用
-	#            [ｲﾒｰｼﾞ番号]     * ( 回数 )  ## -1 のｲﾝﾃﾞｯｸｽは最後を示す
-	cmd_list += ([cavityCount-1] * (keyList[-1][0] * resin_path + keyList[-1][1]))
+	for nn in range(startIdx,len(cmd_list)):
+		cmd_list[nn][1] = cavityCount -1
 
 	if firstCure != 0:
 		#最初の硬化ｺﾏﾝﾄﾞを追加
-		cmd_list.insert(firstCure,'C')
+		cmd_list.insert(firstCure,['C',0])
 
 	#層毎の硬化ｺﾏﾝﾄﾞを追加
 	for n in range(cureCount):
-		cmd_list.insert(firstCure+curePath*n,'C')
+		cmd_list.insert(firstCure+curePath*(n+1)+(n+1),['C',0])
 
 	return cmd_list	
 
@@ -809,7 +834,7 @@ def glue_print_command(layerNo, subNo, materialName, originZ, pathCnt=2):
 		idx = layer[1]
 
 		#分割されたｲﾒｰｼﾞﾌｧｲﾙ名
-		img_file = 'image/glueImage_M0101_B' + '{0:02d}{1:02d}'.format(idx[0],idx[1]) + 'png' 
+		img_file = 'image/glueImage_M0101_B' + '{0:02d}{1:02d}'.format(idx[0],idx[1]) + '.png' 
 
 		#ﾊﾟﾗﾒｰﾀ設定
 		params.update({'printImage':img_file})
@@ -824,7 +849,7 @@ def glue_print_command(layerNo, subNo, materialName, originZ, pathCnt=2):
 
 	return elm_list
 
-def parts_mount_command(layerNo, mount_list):
+def parts_mount_command(layerNo, mount_list, ofstX=0.0, ofstY=0.0):
 	u'''実装ｺﾏﾝﾄﾞの生成
 	'''
 
@@ -834,7 +859,7 @@ def parts_mount_command(layerNo, mount_list):
 	params = {'layerNo':layerNo, 'direction':0 }
 
 	for idx,md in enumerate(mount_list):
-		params.update({'partName':md.name,'x':md.xPos,'y':md.yPos,'z':md.zPos,'angle':md.angle,'direction':0})
+		params.update({'partName':md.name,'x':md.xPos+ofstX,'y':md.yPos+ofstY,'z':md.zPos,'angle':md.angle,'direction':0})
 
 		#印刷
 		elm_list.append( jobUtil.mount_command(params) )
@@ -905,8 +930,12 @@ def emb_layer_print(layerNo, subNo, materialName, imageFile, originZ, idx):
 
 def create_job_element(layerNo, subNo, imageFile, materialName, originZ, cmd_list, mount_list):
 	u'''JOB出力用ﾃﾞｰﾀの生成(XML文字列のﾘｽﾄ)
+		cmd_list: [(image_table No,imageFileNo), ...]
 	'''
 	elm_list = []
+
+	#ｲﾒｰｼﾞﾌｧｲﾙ名をﾌｧｲﾙ名と拡張子に分割
+	img_name,ext = os.path.splitext( os.path.basename(imageFile) )
 
 	#接着ｺﾏﾝﾄﾞ
 	elm_list.extend( glue_print_command(layerNo,subNo,materialName,originZ) )
@@ -918,21 +947,19 @@ def create_job_element(layerNo, subNo, imageFile, materialName, originZ, cmd_lis
 	elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage.png", originZ) )
 
 	#ｺﾏﾝﾄﾞﾘｽﾄの展開
-	imgIdx = 0
-	for code in cmd_list:
-		if isinstance(code,str) == True:
+	sub = subNo
+	for imgIdx,fileNo in cmd_list:
+		if isinstance(imgIdx,str) == True:
 			#硬化ｺﾏﾝﾄ
-			elm_list.extend( curing_command(layerNo, subNo, materialName, imageFile, originZ) )
+			elm_list.extend( curing_command(layerNo, sub, materialName, imageFile, originZ) )
 
 		else:
-			imageFile = "embedded-e_" + str(code) + ".png"
-			elm_list.extend( emb_layer_print(layerNo, subNo, materialName, imageFile, originZ,imgIdx ) )
-			imgIdx += 1
-			if imgIdx >= len(image_table):
-				imgIdx = 0
+			imageFile = img_name + "-e_" + str(fileNo) + ".png"
+			elm_list.extend( emb_layer_print(layerNo, imgIdx+1, materialName, imageFile, originZ,imgIdx ) )
+		sub += 1
 
 	#最終硬化
-	elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage.png", originZ) )
+	#elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage.png", originZ) )
 
 	return elm_list
 
@@ -969,7 +996,7 @@ def embedded(layerNo, imageFile, mountFile, sectionName, materialName, originZ, 
 	job_parts = jobUtil.create_parts_list()
 
 	#実装ﾃﾞｰﾀﾌｧｲﾙより実装ﾘｽﾄを作成(実装ﾘｽﾄはJOBﾌｫﾙﾀﾞ下のpartsにある事)
-	mntFile = mcmUtil.get_job_path() + '\\parts\\' + mountFile
+	mntFile = mcmUtil.get_job_path() + '\\' + mountFile
 	mountList = jobUtil.create_mount_list(mntFile,ofstX,ofstY)
 
 	#実装ﾃﾞｰﾀより実装するﾚｲﾔｰの部品ﾘｽﾄを得る
@@ -1006,8 +1033,6 @@ def embedded(layerNo, imageFile, mountFile, sectionName, materialName, originZ, 
 	# {(層数,ﾊﾟｽ数):[ [cavity_list],[cavity_list] ],}
 	cavity_grp = {k:list(g) for k, g in groupby(cavity_list, key=lambda x: (x[2],x[3]))}
 
-	#cavity_group = group_cavity_path(cavity_list)
-
 	#埋め込みｺﾏﾝﾄﾞﾘｽﾄの生成
 	cmd_list = create_cmd_list(cavity_grp,cureLayer)
 
@@ -1026,21 +1051,8 @@ def embedded(layerNo, imageFile, mountFile, sectionName, materialName, originZ, 
 	for idx,file in enumerate(files):
 		imgFiles += jobUtil.split_image(blockX,blockY,file)
 
-
 	#JOB出力ﾃﾞｰﾀの生成
-	elm_list = []
-
-	#接着ｺﾏﾝﾄﾞ
-	elm_list.extend( glue_print_command(layerNo,1,materialName,originZ) )
-
-	#実装ｺﾏﾝﾄﾞ
-	elm_list.extend( parts_mount_command(layerNo, mount_list) )
-
-	#実装後の硬化
-	elm_list.extend( curing_command(layerNo, 1, materialName, imageFile, originZ) )
-
-	#ｺﾏﾝﾄﾞﾘｽﾄの展開
-	elm_list.extend( create_job_element(layerNo, 1, imageFile, materialName, originZ, cmd_list, mount_list) )
+	elm_list = create_job_element(layerNo, 1, imageFile, materialName, originZ, cmd_list, mount_list)
 
 	return elm_list
 
@@ -1106,4 +1118,4 @@ if __name__ == '__main__':
 	#rect_png_test("d1.png", jobUtil.PartsData("org",1.6, 0.8, 0.45) )
 	#rect_png_test("d2.png", jobUtil.PartsData("MPU-9250",3.0, 3.0, 1.0) )
 	#rect_png_test("d3.png", jobUtil.PartsData("C25",1.6, 0.8, 0.8) )
-	embedded(layerNo=10, imageFile='16-f.png', mountFile='mountData.txt', sectionName='section1', materialName=u"構造材1パス",originZ=1.28, blockX=4, blockY=4)
+	embedded(layerNo=10, imageFile='19-f.png', mountFile='parts/mount.txt', sectionName='section02', materialName=u"構造材1パス",originZ=1.28, blockX=4, blockY=4)

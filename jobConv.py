@@ -17,6 +17,7 @@ import xml.etree.ElementTree as ET
 import glob		# for ﾌｧｲﾙ一覧用
 
 import mcmUtil
+import traceback
 
 from ctypes import *
 
@@ -274,6 +275,7 @@ if __name__ == '__main__':
 			convert_job(newPath,exePath)
 			user32.MessageBoxW(0,u"JOB変換完了",u"JOB変換",(MB_OK | MB_ICONINFORMATION))
 		except:
-			user32.MessageBoxW(0,u"JOB変換エラー",u"JOB変換",(MB_OK | MB_ICONSTOP))
+			errmsg = traceback.format_exc( sys.exc_info()[2] )
+			user32.MessageBoxW(0,u"JOB変換エラー\n" + errmsg,u"JOB変換",(MB_OK | MB_ICONSTOP))
 
 

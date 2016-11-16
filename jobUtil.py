@@ -31,7 +31,7 @@ burn_cmd_items = ['scanList','materialName','imageOriginX','imageOriginY','image
 
 maintenance_cmd_items = ['target','purgeTime','wipingMode','flushCount','cappingMode']
 
-mount_cmd_items = ['layerNo','partsName','x','y','z','angle','direction','placeOffsetX','placeOffsetY','placeOffsetZ']
+mount_cmd_items = ['layerNo','partName','x','y','z','angle','direction','placeOffsetX','placeOffsetY','placeOffsetZ']
 
 def split_image(bx, by, imgFile):
 	u"""[指定されたﾌﾞﾛｯｸ数でｲﾒｰｼﾞﾌｧｲﾙを分割する]
