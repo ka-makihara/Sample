@@ -260,6 +260,13 @@ if __name__ == '__main__':
 	#from ctypes import *
 	#user32 = windll.user32
 
+	#ｴﾝｺｰﾃﾞｨﾝｸﾞを統一する
+	#  ※setdefaultencoding() は sitecustomizeﾓｼﾞｭｰﾙからのみ使用するように定義
+	#    されているため、site.py から呼び出された後でこの関数はsysから削除される
+	#    よって、reload() で再ﾛｰﾄﾞしないと関数が実行できない
+	reload(sys)
+	sys.setdefaultencoding('cp932')
+
 	if len(sys.argv) == 1:
 		#引数にJOBﾌｫﾙﾀﾞが指定されていない
 		user32.MessageBoxW(0,u"引数にJOBﾌｫﾙﾀﾞを指定してください",u"引数ｴﾗｰ",(MB_OK | MB_ICONSTOP))
