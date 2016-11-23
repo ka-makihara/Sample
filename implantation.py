@@ -55,6 +55,9 @@ image_table = [
 [(0.0000000,0.1270000,0.0000),(1,1)]
 ]
 
+#画像位置ずれ補正用(本来は不要なはずだが・・・)
+img_pix_offsetY = 10
+img_pix_offsetX = -3
 '''
 #PILデータで画像を読み込む
 im = Image.open('t.jpg')
@@ -412,15 +415,13 @@ def show_cv_image(srcImg):
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
 
-def create_rect_image(partsData, angle=0.0):
+def create_rect_image(partsData, angle=0.0 ):
 	u'''矩形のｲﾒｰｼﾞﾃﾞｰﾀを生成(Pillowﾃﾞｰﾀ)
 		partsData: ﾊﾟｰﾂﾃﾞｰﾀ
-	'''
-	#白黒反転用のﾙｯｸｱｯﾌﾟﾃｰﾌﾞﾙ
-	#lookup_tbl = np.ones((256,1),dtype='uint8')
-	#for i in range(256):
-	#	lookup_tbl[i][0] = 255 - i
 
+		回転を考慮するために実際のｷｬﾝﾊﾞｽはｷｬﾋﾞﾃｨｻｲｽﾞの二倍にする
+		ｷｬﾋﾞﾃｨは白、ｷｬﾋﾞﾃｨの内側は128(合成のため)とする
+	'''
 	#埋め込みｴﾘｱ外側の大きさﾄﾞｯﾄ数
 	outer_img_size = outer_embedded_dot(partsData)
 
@@ -429,7 +430,7 @@ def create_rect_image(partsData, angle=0.0):
 
 	canvas_size = (outer_img_size[0]*2,outer_img_size[1]*2)
 	canvas = Image.new('L',canvas_size,0)
-	#ｸﾞﾚｰｽｹｰﾙの画像ﾃﾞｰﾀを生成する(外側:黒、内側:白)
+	#ｸﾞﾚｰｽｹｰﾙの画像ﾃﾞｰﾀを生成する(外側:白、内側:黒)
 	outer_img = Image.new('L',outer_img_size,255)
 	inner_img = Image.new('L',inner_img_size,128)
 
@@ -448,27 +449,11 @@ def create_rect_image(partsData, angle=0.0):
 	#指定角度で回転
 	tmp = canvas.rotate(angle)
 
-	#tmp.save("tmp3.png")
-	#ocv_img = np.asarray(tmp)
-	#show_cv_image(ocv_img)
-	#ret,th1 = cv2.threshold(ocv_img,130,255,cv2.THRESH_BINARY)
-
-	#img_gray = cv2.cvtColor(src_img, cv2.COLOR_BGR2GRAY)
-	#contours = cv2.findContours(img_gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[1]
-	#contours = cv2.findContours(ocv_img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[1]
-	#contours = cv2.findContours(th1, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)[1]
-
-	#cv2.drawContours(ocv_img,contours,-1,(0,255,0),3)
-	#show_cv_image(ocv_img)
-
-	#cuts = int(math.floor( (outer_img_size[0]+outer_img_size[1]) / math.sqrt(2)))
-	#pos = int((canvas_size[0]-cuts) / 2)
-	#tmp = tmp.crop( (pos,pos,pos+cuts,pos+cuts))
-
 	return tmp
-	#return outer_img.rotate(angle)
 
-def paste_image(canvas_inf, canvas, src_img, offset, mode=0):
+def paste_image(canvas_inf, canvas, src_img, offset):
+	u'''ｷｬﾝﾊﾞｽにｷｬﾋﾞﾃｨｲﾒｰｼﾞを張り付ける
+	'''
 	canvas_pix = canvas.load()
 	src_pix = src_img.load()
 	src_size = src_img.size
@@ -480,16 +465,26 @@ def paste_image(canvas_inf, canvas, src_img, offset, mode=0):
 			src = src_pix[xx,yy]
 			if info == 0:
 				if src == 0:
+					#回転のためのﾀﾞﾐｰ領域なら
 					pass
 				else:
-					canvas_pix[xx+offset[0],yy+offset[1]] = src
+					if src == 128:
+						#ｷｬﾋﾞﾃｨ内側(ﾊﾟｰﾂ領域)
+						canvas_pix[xx+offset[0],yy+offset[1]] = 0 
+					else:
+						#ｷｬﾋﾞﾃｨ外郭(白)
+						canvas_pix[xx+offset[0],yy+offset[1]] = src
+
 					canvas_inf[yy+offset[1]][xx+offset[0]] += 1
 			else:
-				if base == 128:
-					pass
-				elif base == 255 and src == 128:
-					canvas_pix[xx+offset[0],yy+offset[1]] = src
-					canvas_inf[yy+offset[1]][xx+offset[0]] += 1
+				if base == 255:
+					if src == 0:
+						pass
+					elif src == 128:
+						canvas_pix[xx+offset[0],yy+offset[1]] = 0 
+						canvas_inf[yy+offset[1]][xx+offset[0]] += 1
+					else:
+						canvas_inf[yy+offset[1]][xx+offset[0]] += 1
 
 def get_mount_area(canvas, (x,y)):
 	pix = canvas.load()
@@ -577,17 +572,17 @@ def create_cavity_image(outer_rect, inner_rect):
 
 	return outer_img
 
-def create_embedded_image(fileName, cavity_dict, imageSize=(1536,3344)):
+def create_embedded_image(fileName, cavity_grp, imageSize=(1536,3344)):
 	u'''埋め込みﾋﾞｯﾄﾏｯﾌﾟの生成
 	'''
 	files = []
 
-	keyList = sorted(cavity_dict.keys(),reverse=True)
+	keyList = sorted(cavity_grp.keys(),reverse=True)
 	canvas = Image.new('L',imageSize,255)
 
 	#for key, cavities in cavity_list.items():
 	for key in keyList:
-		cavities = cavity_dict[key]
+		cavities = cavity_grp[key]
 		for cavity in cavities:
 			outer_rect = cavity[0]
 			inner_rect = cavity[1]
@@ -598,6 +593,35 @@ def create_embedded_image(fileName, cavity_dict, imageSize=(1536,3344)):
 		#ﾌｧｲﾙ名
 		imageName = mcmUtil.get_job_path() + '\\image\\' + fileName + "-e_" + str( len(files) ) + ".png"
 		canvas.save(imageName)
+		files += [imageName]
+
+	return files
+
+def create_embedded_image2(fileName, cavity_grp, contours, imageSize=(1536,3344)):
+	u'''埋め込みﾋﾞｯﾄﾏｯﾌﾟの生成
+		cavity_grp: {(層数,ﾊﾟｽ数):[[[outerIdx,innerIdx,innerIdx,...],層数,ﾊﾟｽ数]], ...
+		   contours: 輪郭情報
+	'''
+	files = []
+
+	keyList = sorted(cavity_grp.keys(),reverse=True)
+	canvas = Image.new('L',imageSize,255)
+	ocv_img = np.asarray(canvas)
+
+	#for key, cavities in cavity_list.items():
+	for key in keyList:
+		cavities = cavity_grp[key]
+		for cavity in cavities:
+			outerIdx = cavity[0][0]
+			innerIdx = cavity[0][1]
+
+			cv2.fillConvexPoly(ocv_img,contours[outerIdx],(0,0,0))
+			cv2.fillConvexPoly(ocv_img,contours[innerIdx],(255,255,255))
+
+		#ﾌｧｲﾙ名
+		imageName = mcmUtil.get_job_path() + '\\image\\' + fileName + "-e_" + str( len(files) ) + ".png"
+		#canvas.save(imageName)
+		cv2.imwrite(imageName,ocv_img)
 		files += [imageName]
 
 	return files
@@ -615,6 +639,22 @@ def create_glue_image(image_list, imageFileName='glueImage.png', size=(1536,3344
 
 	canvas.save(imageFileName)
 
+def create_glue_image2(cavity_list, contours, imageFileName='glueImage.png', size=(1536,3344)):
+	u''' 接着用画像の生成
+		ｷｬﾋﾞﾃｨの情報から接着用画像を生成します
+		cavity_list: [[outerIdx,innerIdx,innerIdx,...],層数,ﾊﾟｽ数],[[],,], ...
+		   contours: 輪郭情報
+	'''
+	canvas = Image.new('L',size,255)
+	ocv_img = np.asarray(canvas)
+
+	for idx,obj_list in enumerate(cavity_list):
+		for obj in obj_list[0][1:]:
+			con = contours[obj]
+			cv2.fillConvexPoly(ocv_img,con,(0,0,0))
+
+	cv2.imwrite(imageFileName,ocv_img)
+
 def create_cavity_canvas(mount_list,job_parts, imgSize):
 	u'''実装ﾃﾞｰﾀを元にｷｬﾋﾞﾃｨｲﾒｰｼﾞを生成してcanvasに張り付ける
 		mount_list: 実装ﾘｽﾄ
@@ -629,13 +669,13 @@ def create_cavity_canvas(mount_list,job_parts, imgSize):
 
 	for md in mount_list:
 		parts = filter((lambda x: x.name == md.name),job_parts)
-		cavity_img = create_rect_image( parts[0],md.angle )
+		cavity_img = create_rect_image( parts[0],md.angle)
 
 		#canvas 上でのｷｬﾋﾞﾃｨｲﾒｰｼﾞのﾋﾟｸｾﾙ位置
 		partsCenter = mm_to_pix(md.position())
 
 		#貼り付け位置
-		pos = (partsCenter[0]-cavity_img.size[0]/2-3, canvas.size[1]-(partsCenter[1]+cavity_img.size[1]/2)+10)
+		pos = (partsCenter[0]-cavity_img.size[0]/2+img_pix_offsetX, canvas.size[1]-(partsCenter[1]+cavity_img.size[1]/2)+img_pix_offsetY)
 		#
 		#本来はこちらの位置のばすだが、ズレるので
 		#pos = (partsCenter[0]-cavity_img.size[0]/2, canvas.size[1]-(partsCenter[1]+cavity_img.size[1]/2))
@@ -680,6 +720,54 @@ def link_cavity_parts(canvas, mount_list, job_parts):
 
 	return cavity_dict	
 
+def search_cavity_dict2(index, cavity_dict, chIdx):
+	for key, val in cavity_dict.items():
+		cvty_list = val[0]
+		if chIdx in cvty_list[1:]:
+			return key
+
+	return 'cavity_' + str(index)
+
+def link_cavity_parts2(ocv_img, mount_list,job_parts, cvty_list, contours):
+	u'''ﾊﾟｰﾂの実装位置からｷｬﾋﾞﾃｨｻｲｽﾞを画像より検索してｷｬﾋﾞﾃｨと実装ﾃﾞｰﾀを関連づける
+		   ocv_img: ｷｬﾋﾞﾃｨ画像が配置された画像(openCv形式)
+		mount_list: 実装ﾘｽﾄ
+		 job_parts: JOBに定義されたﾊﾟｰﾂﾘｽﾄ
+		 cvty_list: ｷｬﾋﾞﾃｨの親子関係ﾘｽﾄ (cavity_group 参照)
+		  contours: openCv で取得した輪郭座標ﾃﾞｰﾀ
+		戻り値のﾃﾞｰﾀ形式
+		{'cavity_0':[[cavity_list], parts,parts,parts,....]}
+	'''
+	cavity_dict = {}
+
+	index = 0
+	for idx,md in enumerate(mount_list):
+		parts = filter((lambda x: x.name == md.name),job_parts)
+		#canvas 上でのｷｬﾋﾞﾃｨｲﾒｰｼﾞのﾋﾟｸｾﾙ位置
+		partsCenter = mm_to_pix(md.position())
+		pos = (partsCenter[0], ocv_img.shape[0]-partsCenter[1])
+		#x = pos[0] -2 + img_pix_offsetX
+		#y = pos[1] -2 + img_pix_offsetY
+		#cv2.rectangle(ocv_img,(x,y),(x+2,y+2),(255,255,0),2)
+
+		for cvty in cvty_list:
+			for ch in cvty[1:]:
+				con = contours[ch]
+				fc = int(cv2.pointPolygonTest(con,(pos[0],pos[1]),0))
+				if fc == 1:
+					cavityName = search_cavity_dict2(index,cavity_dict,ch)
+
+					md.parts = parts[0]	#実装ﾃﾞｰﾀとﾊﾟｰﾂﾃﾞｰﾀを関連付け
+
+					if cavity_dict.has_key(cavityName) == True:
+						cavity_dict[cavityName].append(md)
+					else:
+						cavity_dict[cavityName] = [cvty,md]
+						index += 1
+
+	#cv2.imwrite('vv.png',ocv_img)
+	return cavity_dict
+
 def calc_cavity_path(cavity_dict):
 	u''' 各ｷｬﾋﾞﾃｨに実装するﾊﾟｰﾂから埋め込みの層数とﾊﾟｽ数を計算する
 		cavity_dict: ｷｬﾋﾞﾃｨの矩形とｷｬﾋﾞﾃｨに埋め込むﾊﾟｰﾂのﾘｽﾄ
@@ -710,6 +798,39 @@ def calc_cavity_path(cavity_dict):
 
 	#層数の多い順、ﾊﾟｽ数の多い順にｿｰﾄする
 	cavity_list.sort(key=lambda x:(x[2],x[3]),reverse=True )
+
+	return cavity_list
+
+def calc_cavity_path2(cavity_dict, contours):
+	u''' 各ｷｬﾋﾞﾃｨに実装するﾊﾟｰﾂから埋め込みの層数とﾊﾟｽ数を計算する
+		cavity_dict: ｷｬﾋﾞﾃｨの矩形とｷｬﾋﾞﾃｨに埋め込むﾊﾟｰﾂのﾘｽﾄ
+			<ﾃﾞｰﾀ形式>
+				{"cavity_name":[outerIdx,innerIdx,innerIdx],埋め込み情報,埋め込み情報,.....}
+
+		<ﾘﾀｰﾝﾃﾞｰﾀ:ﾘｽﾄ>
+			[[outerIdx,innerIdx,innerIdx,...],層数,ﾊﾟｽ数]],[...],[...], ｷｬﾋﾞﾃｨの数だけ
+	'''
+	cavity_list = []
+
+	#ｷｬﾋﾞﾃｨとｷｬﾋﾞﾃｨに実装するﾊﾟｰﾂから埋め込み層数を計算
+	for val in cavity_dict.values():
+		mnt_list = val[1:]
+
+		if len(mnt_list) > 1:
+			#一つのｷｬﾋﾞﾃｨに複数のﾊﾟｰﾂを実装する場合
+			virParts = create_multi_parts(mnt_list)
+			printQty = embedded_print_qty(virParts)
+			printPath = embedded_print_path(virParts)
+		else:
+			#一つのｷｬﾋﾞﾃｨに一つのﾊﾟｰﾂ
+			printQty = embedded_print_qty(mnt_list[0].parts)
+			printPath = embedded_print_path(mnt_list[0].parts)
+
+		###    image_list::[[outer,inner,inner,...],  層数,   ﾊﾟｽ数]
+		cavity_list.append( [val[0],printQty,printPath] )
+
+	#層数の多い順、ﾊﾟｽ数の多い順にｿｰﾄする
+	cavity_list.sort(key=lambda x:(x[1],x[2]),reverse=True )
 
 	return cavity_list
 
@@ -807,6 +928,32 @@ def group_cavity_path(cavity_list):
 		for vv in val:
 			print vv
 
+def get_child(idx, hierarchy):
+	lst = [idx]
+	nn = hierarchy[idx][0]
+	if hierarchy[idx][0] != -1:
+		return lst + get_child(nn,hierarchy)
+
+	return lst
+
+def cavity_group(hierarchy):
+	'''ｷｬﾋﾞﾃｨの親子関係をﾘｽﾄ化する
+		return: ｲﾝﾃﾞｯｸｽ・ﾘｽﾄ
+			[
+				[(最外形)RootNo, ChildNo1, ChildNo2, ChildNo3,...]
+				[(最外形)RootNo, ChildNo1, ChildNo2, ChildNo3,...],
+			]	
+	'''
+	grp = []
+
+	hi = hierarchy[0]
+	for idx,hh in enumerate(hi):
+		Child = hh[2]
+		if Child != -1:
+			chList = [idx] + get_child(Child,hi)
+			grp.append(chList)
+
+	return grp
 
 ####################################
 #
@@ -866,7 +1013,7 @@ def parts_mount_command(layerNo, mount_list, ofstX=0.0, ofstY=0.0):
 
 	return elm_list
 
-def curing_command(layerNo, subNo, materialName, imageFile, originZ):
+def curing_command(layerNo, subNo, materialName, imageFile, originZ, capping=0):
 	u'''硬化用印刷(print)ｺﾏﾝﾄﾞ生成
 	'''	
 	elm_list = []
@@ -882,7 +1029,7 @@ def curing_command(layerNo, subNo, materialName, imageFile, originZ):
 	elm_list.append( jobUtil.print_command(params) )
 
 	#maintenamceCommand
-	params = {'target':0, 'purgeTime':800,'wipingMode':1,'flushCount':100,'cappingMode':1}
+	params = {'target':0, 'purgeTime':800,'wipingMode':1,'flushCount':100,'cappingMode':capping}
 	elm_list.append( jobUtil.maintenance_command(params) )
 
 	return elm_list
@@ -946,20 +1093,22 @@ def create_job_element(layerNo, subNo, imageFile, materialName, originZ, cmd_lis
 	#実装後の硬化(硬化用のｲﾒｰｼﾞは接着用のｲﾒｰｼﾞを流用。実際には使用しないのでﾀﾞﾐｰ定義)
 	elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage.png", originZ) )
 
-	#ｺﾏﾝﾄﾞﾘｽﾄの展開
-	sub = subNo
-	for imgIdx,fileNo in cmd_list:
+	#ｺﾏﾝﾄﾞﾘｽﾄの展開(※最終ｺﾏﾝﾄﾞは「硬化」のはず)
+	sub = 1
+	for imgIdx,fileNo in cmd_list[0:-1]:
 		if isinstance(imgIdx,str) == True:
 			#硬化ｺﾏﾝﾄ
-			elm_list.extend( curing_command(layerNo, sub, materialName, imageFile, originZ) )
+			elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage.png", originZ) )
 
 		else:
 			imageFile = img_name + "-e_" + str(fileNo) + ".png"
-			elm_list.extend( emb_layer_print(layerNo, imgIdx+1, materialName, imageFile, originZ,imgIdx ) )
-		sub += 1
+			elm_list.extend( emb_layer_print(layerNo, sub, materialName, imageFile, originZ,imgIdx ) )
+			sub += 1
+			if sub > 40:
+				sub = 1
 
-	#最終硬化
-	#elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage.png", originZ) )
+	#最終硬化(最終硬化のみはｷｬｯﾋﾟﾝｸﾞを1にする)
+	elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage.png", originZ,capping=1) )
 
 	return elm_list
 
@@ -1023,28 +1172,41 @@ def embedded(layerNo, imageFile, mountFile, sectionName, materialName, originZ, 
 	#canvas(ｷｬﾋﾞﾃｨｲﾒｰｼﾞと同ｻｲｽﾞ) 上に全ｷｬﾋﾞﾃｨを配置
 	canvas = create_cavity_canvas(mount_list,job_parts, imageSize) 
 
+	#openCv 形式のﾃﾞｰﾀへ
+	ocv_img = np.asarray(canvas)
+
+	#ｷｬﾋﾞﾃｨの輪郭抽出
+	contours,hierarchy = cv2.findContours(ocv_img,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
+
+	#輪郭を親子で分類
+	cvty_list = cavity_group(hierarchy)
+
 	#ﾊﾟｰﾂの実装位置からｷｬﾋﾞﾃｨｻｲｽﾞを画像より検索してｷｬﾋﾞﾃｨと実装ﾃﾞｰﾀを関連づける
-	cavity_dict = link_cavity_parts(canvas,mount_list,job_parts)
+	#cavity_dict = link_cavity_parts(canvas,mount_list,job_parts)
+	cavity_dict = link_cavity_parts2(ocv_img,mount_list,job_parts,cvty_list,contours)
 
 	#ｷｬﾋﾞﾃｨとｷｬﾋﾞﾃｨに実装するﾊﾟｰﾂから埋め込み層数を計算
-	cavity_list = calc_cavity_path(cavity_dict) 
+	cavity_list = calc_cavity_path2(cavity_dict,contours) 
 
 	#層数とパス数が同じものをｸﾞﾙｰﾌﾟ化した辞書を生成
 	# {(層数,ﾊﾟｽ数):[ [cavity_list],[cavity_list] ],}
-	cavity_grp = {k:list(g) for k, g in groupby(cavity_list, key=lambda x: (x[2],x[3]))}
+	#cavity_grp = {k:list(g) for k, g in groupby(cavity_list, key=lambda x: (x[2],x[3]))}
+	cavity_grp = {k:list(g) for k, g in groupby(cavity_list, key=lambda x: (x[1],x[2]))}
 
 	#埋め込みｺﾏﾝﾄﾞﾘｽﾄの生成
 	cmd_list = create_cmd_list(cavity_grp,cureLayer)
 
 	#接着ﾌｧｲﾙの生成(接着用ｲﾒｰｼﾞ名は glueImage.png)
 	glueImageName = mcmUtil.get_job_path() + '\\image\\glueImage.png' 
-	create_glue_image(cavity_list,glueImageName,imageSize)
+	#create_glue_image(cavity_list,glueImageName,imageSize)
+	create_glue_image2(cavity_list,contours,glueImageName,imageSize)
 
 	#接着画像を分割
 	glue_files = jobUtil.split_image(blockX,blockY,glueImageName)
 
 	#埋め込みﾒｰｼﾞﾌｧｲﾙの生成
-	files = create_embedded_image(img_name,cavity_grp,imageSize)
+	#files = create_embedded_image(img_name,cavity_grp,imageSize)
+	files = create_embedded_image2(img_name,cavity_grp,contours,imageSize)
 
 	#埋め込みｲﾒｰｼﾞを指定ﾌﾞﾛｯｸ数で画像分割
 	imgFiles = []
