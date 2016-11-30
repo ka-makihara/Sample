@@ -777,6 +777,22 @@ def create_glue_image2(cavity_list, contours, imageFileName='glueImage.png', siz
 
 	cv2.imwrite(imageFileName,ocv_img)
 
+def create_glue_image3(cavity_list, contours, imageFileName='glueImage.png', size=(1536,3344)):
+	u''' 接着用画像の生成
+		ｷｬﾋﾞﾃｨの情報から接着用画像を生成します
+		cavity_list: [[outerIdx,innerIdx,innerIdx,...],[実装ﾘｽﾄ],層数,ﾊﾟｽ数],[[],,], ...
+		   contours: 輪郭情報
+	'''
+	canvas = Image.new('L',size,255)
+	ocv_img = np.asarray(canvas)
+
+	for idx,obj_list in enumerate(cavity_list):
+		for obj in obj_list[1:]:	#内側の輪郭情報ﾘｽﾄ
+			con = contours[obj]
+			cv2.fillConvexPoly(ocv_img,con,(0,0,0))	#輪郭の内側を塗りつぶす(四隅が欠けるが問題無い)
+
+	cv2.imwrite(imageFileName,ocv_img)
+
 def create_embedded_canvas(mount_list,job_parts, imgSize, contours):
 	u'''実装ﾃﾞｰﾀを元に埋め込みｲﾒｰｼﾞを生成してcanvasに張り付ける
 		mount_list: 実装ﾘｽﾄ
@@ -804,7 +820,7 @@ def create_embedded_canvas(mount_list,job_parts, imgSize, contours):
 		#pos = (partsCenter[0]-cavity_img.size[0]/2, canvas.size[1]-(partsCenter[1]+cavity_img.size[1]/2))
 
 		#canvas にｷｬﾋﾞﾃｨｲﾒｰｼﾞを合成
-		paste_image(canvas_info, canvas, cavity_img,pos, contours)
+		paste_image2(canvas_info, canvas, cavity_img,pos, contours)
 
 	canvas.save("emb_canvas.png")
 
@@ -1085,10 +1101,10 @@ def calc_cavity_path2(cavity_dict, contours, canvas, emb_canvas):
 			S = (V1 - (Vp * 1000000.0) - V2) / (resin_dot_qty * resin_ratio)
 
 			#ﾊﾟｽ数
-			P = S / (wpix2 / resin_img_block)
+			P = int(S / (wpix2 / resin_img_block))
 
-			printQty = P /40
-			printPath = P % 40
+			printQty = int(P /40)
+			printPath = P - (printQty * 40)
 
 			# 旧方式、同一ｷｬﾋﾞﾃｨに実装する複数のﾊﾟｰﾂを大きな一つとﾊﾟｰﾂとみなす、ｷｬﾋﾞﾃｨ形状が矩形限定
 			#virParts = create_multi_parts(mnt_list)
@@ -1452,8 +1468,12 @@ def embedded(layerNo, imageFile, mountFile, layerName, materialName, originZ, cu
 	#contours,hierarchy = cv2.findContours(ocv_img,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
 	contours,hierarchy = cv2.findContours(ocv_img,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
 
+	#親子関係を含めた輪郭
+	cont2,hi2 = cv2.findContours(ocv_img,cv2.RETR_CCOMP,cv2.CHAIN_APPROX_SIMPLE)
+
 	#輪郭を親子で分類(※RETR_CCOMP ﾓｰﾄﾞでない場合は無意味=>親子関係を検知しないので)
 	cvty_list = cavity_group(hierarchy)
+	cvty_list2 = cavity_group(hi2)
 
 	#埋め込みｲﾒｰｼﾞをcanvasに配置
 	emb_canvas = create_embedded_canvas(mount_list,job_parts, imageSize, contours) 
@@ -1477,14 +1497,15 @@ def embedded(layerNo, imageFile, mountFile, layerName, materialName, originZ, cu
 	#接着ﾌｧｲﾙの生成(接着用ｲﾒｰｼﾞ名は glueImage.png)
 	glueImageName = mcmUtil.get_job_path() + '\\image\\glueImage.png' 
 	#create_glue_image(cavity_list,glueImageName,imageSize)
-	create_glue_image2(cavity_list,contours,glueImageName,imageSize)
+	#create_glue_image2(cavity_list,contours,glueImageName,imageSize)
+	create_glue_image3(cvty_list2,cont2,glueImageName,imageSize)
 
 	#接着画像を分割
 	glue_files = jobUtil.split_image(blockX,blockY,glueImageName)
 
 	#埋め込みﾒｰｼﾞﾌｧｲﾙの生成
 	#files = create_embedded_image(img_name,cavity_grp,imageSize)
-	files = create_embedded_image2(img_name,cavity_grp,contours,imageSize)
+	files = create_embedded_image2(img_name,cavity_grp,imageSize)
 
 	#埋め込みｲﾒｰｼﾞを指定ﾌﾞﾛｯｸ数で画像分割
 	imgFiles = []
@@ -1558,4 +1579,4 @@ if __name__ == '__main__':
 	#rect_png_test("d1.png", jobUtil.PartsData("org",1.6, 0.8, 0.45) )
 	#rect_png_test("d2.png", jobUtil.PartsData("MPU-9250",3.0, 3.0, 1.0) )
 	#rect_png_test("d3.png", jobUtil.PartsData("C25",1.6, 0.8, 0.8) )
-	embedded(layerNo=10, imageFile='19-f.png', mountFile='parts/mount.txt', layerName='section02', materialName=u"構造材1パス",originZ=1.28, blockX=4, blockY=4)
+	embedded(layerNo=10, imageFile='16-f.png', mountFile='parts/mount.txt', layerName='section01', materialName=u"構造材1パス",originZ=1.28, blockX=4, blockY=4)

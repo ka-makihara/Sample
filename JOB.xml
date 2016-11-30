@@ -47,7 +47,7 @@
       <offsetZ>0</offsetZ>
     </burningUnit>
 
-       <partSupplyUnit>
+   <partSupplyUnit>
       <unitNo>1</unitNo>
       <partName>1005R150</partName>
       <pickPointX>3.75</pickPointX>
@@ -368,6 +368,7 @@
       <nozzleHeight>47</nozzleHeight>
     </nozzleChangeUnit>
   </instrumentGroup>
+
   <materialGroup>
     <materialData>
       <materialName>構造材1パス</materialName>
@@ -390,7 +391,7 @@
       <resolutionY>300</resolutionY>
     </materialData>
    
-       <partsData>
+    <partsData>
       <partName>1005R150</partName>
       <nozzleName>04.10.25C</nozzleName>
       <sizeX>1</sizeX>
@@ -940,7 +941,7 @@
       </shapeData2>
     </partsData>
     <partsData>
-      <partName>1005C100n-2</partName>
+      <partName>1005C100n</partName>
       <nozzleName>04.10.25C</nozzleName>
       <sizeX>1</sizeX>
       <sizeY>0.5</sizeY>
@@ -953,11 +954,11 @@
       <placeOffsetZ>0</placeOffsetZ>
       <motionSpeed>50</motionSpeed>
       <rotationSpeed>200</rotationSpeed>
-      <shapeName>1005C100n-2-1</shapeName>
+      <shapeName>1005C100n-1</shapeName>
       <shapeType>0</shapeType>
       <lighting>4</lighting>
       <correctMode>3</correctMode>
-      <shapeName2>1005C100n-2-2</shapeName2>
+      <shapeName2>1005C100n-2</shapeName2>
       <shapeType2>0</shapeType2>
       <shapeData>
         <Data_Set Template="VT60_Template" Type="VT">
@@ -1001,7 +1002,7 @@
       </shapeData2>
     </partsData>
     <partsData>
-      <partName>1005C100n</partName>
+      <partName>1005C100n-2</partName>
       <nozzleName>04.10.25C</nozzleName>
       <sizeX>1</sizeX>
       <sizeY>0.5</sizeY>
@@ -1014,11 +1015,11 @@
       <placeOffsetZ>0</placeOffsetZ>
       <motionSpeed>50</motionSpeed>
       <rotationSpeed>200</rotationSpeed>
-      <shapeName>1005C100n-1</shapeName>
+      <shapeName>1005C100n-2-1</shapeName>
       <shapeType>0</shapeType>
       <lighting>4</lighting>
       <correctMode>3</correctMode>
-      <shapeName2>1005C100n-2</shapeName2>
+      <shapeName2>1005C100n-2-2</shapeName2>
       <shapeType2>0</shapeType2>
       <shapeData>
         <Data_Set Template="VT60_Template" Type="VT">
@@ -1793,18 +1794,24 @@
         </Data_Set>
       </shapeData2>
     </partsData>
+
+
+
   </materialGroup>
   <sequenceGroup>
+
 <algorithm file="implantation" func="embedded">
-<parameter layerNo="19" imageFile="image/19-f.png" mountFile="parts/mount.txt" sectionName="section02" materialName="構造材1パス" originZ="1.52" cureLayer="4" blockX="4" blockY="4"/>
+<parameter layerNo="16" imageFile="image/16-f.png" mountFile="parts/mount.txt" layerName="section01" materialName="構造材1パス" originZ="1.28" cureLayer="4" blockX="4" blockY="4"/>
 </algorithm>
+
+    <moveCommand>
+      <positionNo>0</positionNo>
+      <offsetX>0</offsetX>
+      <offsetY>0</offsetY>
+      <offsetZ>0</offsetZ>
+      <headRetruction>0</headRetruction>
+      <capping>1</capping>
+    </moveCommand>
+
   </sequenceGroup>
 </JOB>
-
-
-
-
-
-
-
-
