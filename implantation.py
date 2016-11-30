@@ -1370,14 +1370,21 @@ def create_job_element(layerNo, subNo, imageFile, materialName, originZ, cmd_lis
 	'''
 	elm_list = []
 
+	#JOBからｵﾌｾｯﾄ値を読み込む
+	ofstX = float(mcmUtil.get_job_data('instrumentGroup/framePrinter/offsetX'))
+	ofstY = float(mcmUtil.get_job_data('instrumentGroup/framePrinter/offsetY'))
+
 	#ｲﾒｰｼﾞﾌｧｲﾙ名をﾌｧｲﾙ名と拡張子に分割
 	img_name,ext = os.path.splitext( os.path.basename(imageFile) )
 
 	#接着ｺﾏﾝﾄﾞ
-	elm_list.extend( glue_print_command(layerNo,subNo,materialName,originZ) )
+	elm_list.extend( glue_print_command(layerNo,1,materialName,originZ) )
 
-	#実装ｺﾏﾝﾄﾞ
-	elm_list.extend( parts_mount_command(layerNo, mount_list) )
+	#部品実装ｺﾏﾝﾄﾞ前にはﾒﾝﾃﾅﾝｽｺﾏﾝﾄﾞを実行する
+	elm_list.extend( jobUtil.maintenance_command({'target':0, 'purgeTime':800,'wipingMode':1,'flushCount':100,'cappingMode':1}) )
+
+	#実装ｺﾏﾝﾄﾞ(実装ﾃﾞｰﾀにはｵﾌｾｯﾄが加算済みなので)
+	elm_list.extend( parts_mount_command(layerNo, mount_list,-ofstx,-ofsty) )
 
 	#実装後の硬化(硬化用のｲﾒｰｼﾞは接着用のｲﾒｰｼﾞを流用。実際には使用しないのでﾀﾞﾐｰ定義)
 	elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage.png", originZ) )
