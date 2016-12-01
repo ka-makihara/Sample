@@ -1323,6 +1323,14 @@ def curing_command(layerNo, subNo, materialName, imageFile, originZ, capping=0):
 
 	return elm_list
 
+def maintenance_command():
+	elm_list = []
+
+	params = {'target':0, 'purgeTime':800,'wipingMode':1,'flushCount':100,'cappingMode':1}
+	elm_list.append( jobUtil.maintenance_command(params) )
+
+	return elm_list
+
 def emb_layer_print(layerNo, subNo, materialName, imageFile, originZ, idx):
 	u"""印刷ｺﾏﾝﾄﾞ
 		layerNo     : layer番号
@@ -1370,34 +1378,57 @@ def create_job_element(layerNo, subNo, imageFile, materialName, originZ, cmd_lis
 	'''
 	elm_list = []
 
+	#JOBからｵﾌｾｯﾄ値を読み込む
+	ofstX = float(mcmUtil.get_job_data('instrumentGroup/framePrinter/offsetX'))
+	ofstY = float(mcmUtil.get_job_data('instrumentGroup/framePrinter/offsetY'))
+
 	#ｲﾒｰｼﾞﾌｧｲﾙ名をﾌｧｲﾙ名と拡張子に分割
 	img_name,ext = os.path.splitext( os.path.basename(imageFile) )
 
 	#接着ｺﾏﾝﾄﾞ
-	elm_list.extend( glue_print_command(layerNo,subNo,materialName,originZ) )
+	elm_list.extend( glue_print_command(layerNo,1,materialName,originZ) )
 
-	#実装ｺﾏﾝﾄﾞ
-	elm_list.extend( parts_mount_command(layerNo, mount_list) )
+	#部品実装ｺﾏﾝﾄﾞ前にはﾒﾝﾃﾅﾝｽｺﾏﾝﾄﾞを実行する
+	elm_list.extend( maintenance_command() )
+
+	#実装ｺﾏﾝﾄﾞ(実装ﾃﾞｰﾀにはｵﾌｾｯﾄが加算済みなので)
+	elm_list.extend( parts_mount_command(layerNo, mount_list,ofstX,ofstY) )
 
 	#実装後の硬化(硬化用のｲﾒｰｼﾞは接着用のｲﾒｰｼﾞを流用。実際には使用しないのでﾀﾞﾐｰ定義)
-	elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage.png", originZ) )
+	elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage_M0101_B0101.png", originZ) )
+
+	#最初の一層部に乾燥がある==余り乾燥
+	subCure = True if 'C' in cmd_list[0:40] else False
 
 	#ｺﾏﾝﾄﾞﾘｽﾄの展開(※最終ｺﾏﾝﾄﾞは「硬化」のはず)
 	sub = 1
+	imgNo = 0
+	layerOffset = 0
 	for imgIdx,fileNo in cmd_list[0:-1]:
 		if isinstance(imgIdx,str) == True:
 			#硬化ｺﾏﾝﾄ
-			elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage.png", originZ) )
+			elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage_M0101_B0101.png", originZ) )
+			if subCure:
+				#最初の余り乾燥後にsubLayerを1にﾘｾｯﾄする
+				sub = 1
+				subCure = False
 
 		else:
+			if imgNo != fileNo:
+				#ｲﾒｰｼﾞ番号が変わった
+				imgNo = fileNo
+				elm_list.extend(['<comment>ImageChange</comment>'])
+
 			imageFile = img_name + "-e_" + str(fileNo) + ".png"
 			elm_list.extend( emb_layer_print(layerNo, sub, materialName, imageFile, originZ,imgIdx ) )
 			sub += 1
 			if sub > 40:
 				sub = 1
+				layerOffset += 1
+				elm_list.extend(['<comment>_LAYER_</comment>'])
 
 	#最終硬化(最終硬化のみはｷｬｯﾋﾟﾝｸﾞを1にする)
-	elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage.png", originZ,capping=1) )
+	elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage_M0101_B0101.png", originZ,capping=1) )
 
 	return elm_list
 
