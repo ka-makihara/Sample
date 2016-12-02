@@ -1386,7 +1386,7 @@ def create_job_element(layerNo, subNo, imageFile, materialName, originZ, cmd_lis
 	img_name,ext = os.path.splitext( os.path.basename(imageFile) )
 
 	#接着ｺﾏﾝﾄﾞ
-	elm_list.extend( glue_print_command(layerNo,1,materialName,originZ) )
+	elm_list.extend( glue_print_command(layerNo,0,materialName,originZ) )
 
 	#部品実装ｺﾏﾝﾄﾞ前にはﾒﾝﾃﾅﾝｽｺﾏﾝﾄﾞを実行する
 	elm_list.extend( maintenance_command() )
@@ -1397,35 +1397,36 @@ def create_job_element(layerNo, subNo, imageFile, materialName, originZ, cmd_lis
 	#実装後の硬化(硬化用のｲﾒｰｼﾞは接着用のｲﾒｰｼﾞを流用。実際には使用しないのでﾀﾞﾐｰ定義)
 	elm_list.extend( curing_command(layerNo, subNo, materialName, "image/glueImage_M0101_B0101.png", originZ) )
 
-	#最初の一層部に乾燥がある==余り乾燥
-	subCure = True if 'C' in cmd_list[0:40] else False
+	#余り乾燥
+	first = (len(cmd_list) - len( filter(lambda arg: arg[0] == 'C',cmd_list))) % 40
 
 	#ｺﾏﾝﾄﾞﾘｽﾄの展開(※最終ｺﾏﾝﾄﾞは「硬化」のはず)
 	sub = 1
 	imgNo = 0
 	layerOffset = 0
+	printNo = 0
 	for imgIdx,fileNo in cmd_list[0:-1]:
 		if isinstance(imgIdx,str) == True:
 			#硬化ｺﾏﾝﾄ
+			elm_list.extend(['<comment>___________________UV___________________________________________________</comment>'])
 			elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage_M0101_B0101.png", originZ) )
-			if subCure:
-				#最初の余り乾燥後にsubLayerを1にﾘｾｯﾄする
-				sub = 1
-				subCure = False
-
 		else:
 			if imgNo != fileNo:
 				#ｲﾒｰｼﾞ番号が変わった
 				imgNo = fileNo
-				elm_list.extend(['<comment>ImageChange</comment>'])
+				elm_list.extend(['<comment>_ImageChange_#######################################################</comment>'])
 
 			imageFile = img_name + "-e_" + str(fileNo) + ".png"
 			elm_list.extend( emb_layer_print(layerNo, sub, materialName, imageFile, originZ,imgIdx ) )
+			printNo += 1
 			sub += 1
 			if sub > 40:
 				sub = 1
 				layerOffset += 1
-				elm_list.extend(['<comment>_LAYER_</comment>'])
+				elm_list.extend(['<comment>_LAYER_*************************************************************_</comment>'])
+
+		if printNo == first:
+			sub = 1
 
 	#最終硬化(最終硬化のみはｷｬｯﾋﾟﾝｸﾞを1にする)
 	elm_list.extend( curing_command(layerNo, 1, materialName, "image/glueImage_M0101_B0101.png", originZ,capping=1) )
