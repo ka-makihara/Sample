@@ -8,12 +8,20 @@ import collections
 import math
 from xml.etree import ElementTree as ET
 
+# 追加でｲﾝｽﾄｰﾙが必要なﾓｼﾞｭｰﾙ
+#  pip install <ﾓｼﾞｭｰﾙ名> でｲﾝｽﾄｰﾙが必要
+#   PIL  : pillow   ->> pip install pillow
+#   numpy: numpy
 from PIL import Image, ImageDraw
+import numpy as np
 
 ###########################################################
 
 
 # xml の namespace 部を '' で置換するための正規表現ﾃﾞｰﾀ
+#  XML に xmlns="http://webstds.ipc.org/2581" のﾈｰﾑｽﾍﾟｰｽが設定されているために
+#  全てのﾀｸﾞに {http://webstds.ipc.org/2581}/<Tag名>  のようにﾈｰﾑｽﾍﾟｰｽが追加されている
+#  処理しづらいので、{} 部分を置換するための定義
 re_pat = re.compile('\{.*?\}')
 
 # 層ﾃﾞｨｸｼｮﾅﾘ={'層名':Layer}
@@ -45,6 +53,16 @@ layerThick = 0.067	#1層の厚み(mm)
 
 ##########################################################################################
 
+def rot(deg):
+	u'''
+		座標を角度変換するための行列ﾃﾞｰﾀ作成
+		deg: 角度
+	'''
+	r = np.radians(deg)
+	obj = np.matrix( ((np.cos(r),-np.sin(r)),(np.sin(r),np.cos(r))) )
+	return obj
+
+
 class IPCObject(object):
 	def __init__(self, name,attrib=None):
 		self.attrib_ = attrib
@@ -75,11 +93,17 @@ class IPC_RectRound(IPCObject):
 		y1 = int( (y-h)/dotSize )
 		y2 = int( (y+h)/dotSize )
 
-		return [(x1,y1),(x2,y1),(x2,y2),(x1,y2)]
+		return ('RectRound',[(x1,y1),(x2,y1),(x2,y2),(x1,y2)])
 
 class IPC_Circle(IPCObject):
 	def __init__(self, attrib):
 		super(IPC_Circle,self).__init__(attrib['id'],attrib)
+
+	def polygon(self, centerPos):
+		r = int( float( self.attribute['diameter'] ) / dotSize)
+		x = int(float(centerPos[0])/dotSize)
+		y = int(float(centerPos[1])/dotSize)
+		return ('Circle',[(x,y),(r,r)])
 
 ### 色定義
 class IPC_Color(IPCObject):
@@ -88,6 +112,11 @@ class IPC_Color(IPCObject):
 		self.red_ = int(attrib['r'])
 		self.green_ = int(attrib['g'])
 		self.blue_ = int(attrib['b'])
+
+	@property
+	def rgb(self):
+		return (self.red_,self.green_,self.blue_)
+
 
 ###
 ### 層内ｵﾌﾞｼﾞｪｸﾄ
@@ -103,8 +132,8 @@ class IPCObject_Cavity(IPCObject):
 			self.attrib_['y'] = str(pos[0][1])
 
 	def polygon(self):
-		return map(lambda arg: (int(arg[0]/dotSize),int(arg[1]/dotSize)), self.pos_)
-		#return self.pos_
+		return ('Polygon',map(lambda arg: (int(arg[0]/dotSize),int(arg[1]/dotSize)), self.pos_))
+
 
 ### ﾎｰﾙ
 class IPCObject_Hole(IPCObject):
@@ -112,6 +141,11 @@ class IPCObject_Hole(IPCObject):
 		super(IPCObject_Hole,self).__init__('Hole',attrib)
 		self.net_ = net
 
+	def polygon(self):
+		shape_obj = entryStandard[self.attribute['id']]
+		return shape_obj.polygon( (self.attribute['x'],self.attribute['y']) )
+
+### ﾊﾟｯﾄﾞ
 class IPCObject_Pad(IPCObject):
 	def __init__(self, net, attrib):
 		super(IPCObject_Pad,self).__init__('Pad',attrib)
@@ -119,8 +153,8 @@ class IPCObject_Pad(IPCObject):
 
 	def polygon(self):
 		shape_obj = entryStandard[self.attribute['id']]
-
 		return shape_obj.polygon( (self.attribute['x'],self.attribute['y']) )
+
 
 class IPCObject_Package(IPCObject):
 	def __init__(self, polygon, attrib):
@@ -128,9 +162,17 @@ class IPCObject_Package(IPCObject):
 		self.polygon_ = polygon
 		self.pad_list_ = []	
 
-	@property
-	def polygon(self):
-		return self.polygon_
+	def polygon(self, rotate='0.0'):
+		if rotate == '0.0':
+			return ('Polygon',self.polygon_)
+		else:
+			rr = rot(float(rotate))
+			#poly=[]
+			#for pos in self.polygon_:
+			#	p = rr.dot(pos)
+			#	poly.append( (round(p[0,0],3),round(p[0,1],3)) )
+			#return poly
+			return ('Polygon',map(lambda arg:(round(rr.dot(arg)[0,0],3),round(rr.dot(arg)[0,1],3)),self.polygon_))
 
 	def set_land_pattern(self, pad_list):
 		self.pad_list_ = pad_list
@@ -156,15 +198,19 @@ class IPCObject_Component(IPCObject):
 
 	def add_pad(self, obj):
 		self.pad_list_.append(obj)
+	
+	def set_polygon(self, pos):
+		self.pos_ = pos
 
 	def polygon(self):
 		if packages.has_key(self.attribute['packageRef']) == True:
 			package = packages[ self.attribute['packageRef'] ]
 
-			pos = map(lambda arg:( int((self.location_[0]+arg[0])/dotSize), int((self.location_[1]+arg[1])/dotSize)),package.polygon)
-			return pos
+			pol = package.polygon(str(self.rotation_))
+			pos = map(lambda arg:( int((self.location_[0]+arg[0])/dotSize), int((self.location_[1]+arg[1])/dotSize)),pol[1])
+			return ('Polygon',pos)
 		else:
-			return [(0,0),(0,0),(0,0),(0,0)]
+			return ('None',[(0,0),(0,0),(0,0),(0,0)])
 
 
 class IPCObject_Logicalnet(IPCObject):
@@ -178,6 +224,10 @@ class IPCObject_Logicalnet(IPCObject):
 		'''
 		self.pin_ref_.append(pinRef)
 
+	def polygon(self):
+		return ('None',[(0,0)])
+
+
 class IPCObject_PhyNetPoint(IPCObject):
 	def __init__(self, attrib):
 		super(IPCObject_PhyNetPoint,self).__init__('PhyNetPoint',attrib)
@@ -186,17 +236,47 @@ class IPCObject_PhyNetPoint(IPCObject):
 	def add_net_point(self, net_point):
 		self.net_point_.append(net_point)
 
+	def polygon(self):
+		return ('None',[(0,0)])
+
 class IPCObject_Via(IPCObject):
 	def __init__(self, attrib):
 		super(IPCObject_Via,self).__init__('Via',attrib)
 		self.location_ = (0,0)
 
 	def polygon(self):
-		return [(0,0),(0,0),(0,0),(0,0)]
+		shape_obj = entryStandard[self.attribute['id']]
+		return shape_obj.polygon( (self.attribute['x'],self.attribute['y']) )
 
-class IPCObject_Circuit(IPCObject):
-	def __init__(self, attrib):
-		super(IPCObject_Circuit,self).__init__(attrib['net'],attrib)
+
+class IPCObject_Line(IPCObject):
+	def __init__(self, pos, attrib=None):
+		super(IPCObject_Line,self).__init__('Line',attrib)
+		self.pos_ = pos
+
+	def polygon(self):
+		pos = map(lambda arg:( int((arg[0])/dotSize), int((arg[1])/dotSize)),self.pos_)
+		return ('Line',pos)
+
+
+class IPCObject_Polygon(IPCObject):
+	def __init__(self, pos, attrib=None):
+		super(IPCObject_Polygon,self).__init__('Polygon',attrib)
+		self.pos_ = pos
+
+	def polygon(self):
+		pos = map(lambda arg:( int((arg[0])/dotSize), int((arg[1])/dotSize)),self.pos_)
+		return ('Polygon',pos)
+
+
+class IPCObject_Polyline(IPCObject):
+	def __init__(self,pos, attrib=None):
+		super(IPCObject_Polyline,self).__init__('Polyline',attrib)
+		self.pos_ = pos
+
+	def polygon(self):
+		pos = map(lambda arg:( int((arg[0])/dotSize), int((arg[1])/dotSize)),self.pos_)
+		return ('Polyline',pos)
 
 ### 層
 class Layer(IPCObject):
@@ -207,20 +287,17 @@ class Layer(IPCObject):
 		self.thickness_ = 0.0
 
 	@property
-	def thikness(self):
-		return self.thickness_
+	def items(self):
+		return self.items_
 
 	@property
-	def shape(self):
-		return self.shape_
+	def thikness(self):
+		return self.thickness_
 
 	@property
 	def function(self):
 		return self.attrib_['layerFunction']
 
-	@shape.setter
-	def shape(self, pos):
-		self.shape_ = pos
 
 class Layer_Cavity(Layer):
 	def __init__(self, attrib):
@@ -235,7 +312,8 @@ class Layer_Hole(Layer):
 ###############################################################################
 
 def create_shape(elem):
-	''' 形状定義(EntryStandard)
+	u'''
+		形状定義(EntryStandard)
 	'''
 	ch = elem.getchildren()
 	tn = re.sub(re_pat,'',ch[0].tag)
@@ -253,6 +331,9 @@ def create_shape(elem):
 
 
 def xml_entry_standard(elem):
+	u'''
+		<EntryStandard> ﾀｸﾞ処理
+	'''
 	for n,ee in enumerate(elem):
 		if type(ee).__name__ == 'Element':
 			tagName = re.sub(re_pat,'',ee.tag)
@@ -261,6 +342,9 @@ def xml_entry_standard(elem):
 
 
 def xml_entry_color(elem):
+	u'''
+		<EntryColor>ﾀｸﾞ処理
+	'''
 	for n,ee in enumerate(elem):
 		if type(ee).__name__ == 'Element':
 			tagName = re.sub(re_pat,'',ee.tag)
@@ -273,7 +357,7 @@ def xml_entry_color(elem):
 
 
 def xml_content(elem):
-	'''
+	u'''
 		<Content>処理
 	'''
 	for n, ee in enumerate(elem):
@@ -300,7 +384,8 @@ def xml_content(elem):
 				print 'Unsupport tag:{0}'.format(tagName)
 
 def bom_item(elem):
-	'''
+	u'''
+		<BomItem> ﾀｸﾞ処理
 	'''
 	for ee in elem:
 		tagName = re.sub(re_pat,'',ee.tag)
@@ -313,7 +398,7 @@ def bom_item(elem):
 
 
 def xml_bom(elem):
-	'''
+	u'''
 		<Bom> 処理
 	'''
 	for n,ee in enumerate(elem):
@@ -327,7 +412,8 @@ def xml_bom(elem):
 
 
 def xml_stuckup(elem, thick):
-	'''
+	u'''
+		<Stuckup> ﾀｸﾞ処理
 		層構造定義
 	'''
 	for ee in elem:
@@ -370,7 +456,7 @@ def get_layer_list(fromLayerName, toLayerName):
 
 
 def create_pad_stuck(elem, net=None):
-	'''
+	u'''
 		elem: [<LayerPad> or <LayerHole>, ...]
 	'''
 	attr = {}
@@ -396,7 +482,7 @@ def create_pad_stuck(elem, net=None):
 
 
 def pos_polygon(elem):
-	'''
+	u'''
 		elemの属性値、'x','y'を(x,y)のﾘｽﾄとする
 	'''
 	#[(x,y),(x,y), ...]
@@ -404,17 +490,18 @@ def pos_polygon(elem):
 	return [(float(el.attrib['x']),float(el.attrib['y'])) for el in elem.getchildren() if el.attrib.has_key('x') and el.attrib.has_key('y')]
 
 def step_profile(elem):
-	'''
+	u'''
+		<Profile> ﾀｸﾞ処理
 		基板外形
 		list[elem]: elem[0]= <Polygon>
 		children(): <PolyStepSegment>
 	'''
-
 	## pos=[(x,y),(x,y), ...]
 	pos = pos_polygon(elem[0])
 
 def package_land_pattern(elem):
-	'''
+	u'''
+		<Package>-<LandPattern> ﾀｸﾞ処理
 	'''
 	attrs = []
 	for ee in elem:
@@ -427,7 +514,8 @@ def package_land_pattern(elem):
 
 
 def step_package(elem, attrib):
-	'''
+	u'''
+		<Package> ﾀｸﾞ処理
 		list[elem]: elem[0]= <Outline> elem[1]= <LandPattern>
 	'''
 	for ee in elem:
@@ -455,7 +543,8 @@ def step_package(elem, attrib):
 	packages[attrib['name']] = package
 
 def step_component(elem, attrib):
-	'''
+	u'''
+		<Component> ﾀｸﾞ処理
 	'''
 	component = IPCObject_Component(attrib)
 	for ee in elem:
@@ -472,10 +561,9 @@ def step_component(elem, attrib):
 	layers[attrib['layerRef']].items_.append(component)
 
 def step_logical_net(elem, attrib):
+	u'''
+		<LogicalNet> ﾀｸﾞ処理
 	'''
-	'''
-	#net = [elem[x:x + 2] for x in xrange(0, len(elem), 2)]
-
 	netObj = IPCObject_Logicalnet(attrib)
 
 	for ee in elem:
@@ -483,7 +571,8 @@ def step_logical_net(elem, attrib):
 
 
 def step_phynet_group(elem, attrib):
-	'''
+	u'''
+	
 		elem: [<PhyNet>,<PhyNet>, ...]
 	'''
 	for ee in elem:
@@ -530,7 +619,8 @@ def set_layer_object(layer, obj):
 
 
 def layer_feature_set(elem, attrib, layerName):
-	'''
+	u'''
+		<LayerFeature>-<Set> ﾀｸﾞ処理
 		elem:[<Features>, ...]
 		attrib:{}
 	'''
@@ -559,21 +649,26 @@ def layer_feature_set(elem, attrib, layerName):
 		elif tagName == 'Features':
 			ch = ee.getchildren()
 			if 'Line' in ch[0].tag:
-				attr = ch[0].attrib
+				attr = attrib
+				attr.update(ch[0].attrib)
 				attr.update( {k:el.attrib[k] for el in ch[0].getchildren() for k in el.attrib})
-				pos = ( (float(attr['startX']),float(attr['startY'])), (float(attr['endX']),float(attr['endY'])) )
-				layer.items_.append( IPCObject_Circuit(attrib) )
-				pass
+				pos = [ (float(attr['startX']),float(attr['startY'])), (float(attr['endX']),float(attr['endY'])) ]
+				#layer.items_.append( IPCObject_Circuit(pos,attr) )
+				layer.items_.append( IPCObject_Line(pos,attr) )
 			elif 'Polyline' in ch[0].tag:
-				attr = {k:el.attrib[k] for el in ch[0].getchildren() for k in el.attrib}
+				attr = attrib
+				attr.update({k:el.attrib[k] for el in ch[0].getchildren() for k in el.attrib})
 				pos = pos_polygon(ch[0])
-				layer.items_.append( IPCObject_Circuit(attrib) )
-				pass
+				#layer.items_.append( IPCObject_Circuit(pos,attr) )
+				layer.items_.append( IPCObject_Polyline(pos,attr) )
 			elif 'Contour' in ch[0].tag:
 				pos = pos_polygon( ch[0].getchildren()[0] )
-				pass
+				if attrib.has_key('componentRef') == True:
+					component = components[attrib['componentRef']]
+					component.set_polygon(pos)
 			else:
-				pass
+				print '{0} is Undefined'.format(ch[0].tag)
+
 		elif tagName == 'Hole':
 			attr = attrib
 			attr.update( ee.attrib )
@@ -591,7 +686,8 @@ def layer_feature_set(elem, attrib, layerName):
 
 
 def step_layer_feature(elem, attrib):
-	'''
+	u'''
+		<LayerFeature> ﾀｸﾞ処理
 		elem:[<Set>,<Set>,...]
 		attrib: {'layerRef':'ﾚｲﾔｰ名'}
 	'''
@@ -618,20 +714,22 @@ def step_layer_feature(elem, attrib):
 					if 'Line' in ch2[0].tag:
 						attr = ch2[0].attrib
 						pos = ( (float(attr['startX']),float(attr['startY'])), (float(attr['endX']),float(attr['endY'])) )
+						layer.items_.append( IPCObject_Line(pos) )
 					elif 'Polyline' in ch2[0].tag:
 						pos = pos_polygon( ch2[0] )	
+						layer.items_.append( IPCObject_Polyline(pos) )
 					elif 'Contour' in ch2[0].tag:
 						pos = pos_polygon( ch2[0].getchildren()[0] )
-						layer.shape = pos
+						layer.items_.append( IPCObject_Polygon(pos) )
 					else:
 						print 'Error'
-						pass
 
 					#print pos
 
 
 def xml_step(elem):
-	'''
+	u'''
+		<Step> ﾀｸﾞ処理
 	'''
 	for ee in elem:
 		tagName = re.sub(re_pat,'',ee.tag)
@@ -661,12 +759,9 @@ def xml_step(elem):
 			step_layer_feature( ee.getchildren(), ee.attrib )
 			pass
 
-
-
-			
-
 def xml_cad_data(elem):
-	'''
+	u'''
+		<CadData> ﾀｸﾞ処理
 	'''
 	for n,ee in enumerate(elem):
 		tagName = re.sub(re_pat,'',ee.tag)
@@ -691,11 +786,8 @@ def xml_cad_data(elem):
 		elif tagName == 'Step':
 			xml_step( ee.getchildren() )
 
-
-
-
 def xml_ecad(elem):
-	'''
+	u'''
 		<Ecad> ﾀｸﾞ処理
 	'''
 	for n,ee in enumerate(elem):
@@ -710,7 +802,8 @@ def xml_ecad(elem):
 # 公開関数
 #
 def convert():
-	'''
+	u'''
+		読み込んだXML を層ﾃﾞｰﾀに展開する
 	'''
 	global root
 
@@ -737,7 +830,7 @@ def convert():
 			print 'Unsupport tag:{0}'.format(tt[1])
 
 def load_xml(fileName):
-	'''
+	u'''
 		XML ﾌｧｲﾙを読み込む
 	'''
 	global root
@@ -754,6 +847,9 @@ def load_xml(fileName):
 # ﾃﾞﾊﾞｯｸﾞ用関数
 #
 def layer_thick(groupName):
+	u'''
+		ﾚｲﾔｰｸﾞﾙｰﾌﾟに含まれるﾚｲﾔｰの厚みをﾘｽﾄを取得する
+	'''
 
 	if layer_group.has_key(groupName) == False:
 		return 0.0
@@ -765,6 +861,9 @@ def layer_thick(groupName):
 	return  tk
 
 def layer_items(groupName):
+	u'''
+		ﾚｲﾔｰｸﾞﾙｰﾌﾟに含まれるﾚｲﾔｰ名と含まれるｵﾌﾞｼﾞｪｸﾄ名を表示する
+	'''
 	if layer_group.has_key(groupName) == False:
 		return []
 
@@ -773,7 +872,8 @@ def layer_items(groupName):
 		print layer.name, tn
 
 def layer_list():
-	'''
+	u'''
+		ﾚｲﾔｰ一覧表示
 	'''
 	for groupName in layer_group:
 		print '{0}:{1} mm'.format(groupName,layer_thick(groupName))
@@ -786,20 +886,28 @@ def create_board_image():
 		return: Image
 	'''
 	#ﾎﾞｰﾄﾞｻｲｽﾞ
-	shape = layers['BoardShape'].shape
-	sh = sorted(set(shape), key=lambda d: (d[0],d[1]))
+	layer = layers['BoardShape']
+	pol = layer.items[0].polygon()
+
+	sh = sorted(set(pol[1]), key=lambda d: (d[0],d[1]))
 
 	L1 = sh[0]		#(x,y)の最小値
 	L2 = sh[-1]		#(x,y)の最大値
 
-	xs = int(math.ceil((L2[0] - L1[0])/dotSize))
-	ys = int(math.ceil((L2[1] - L1[1])/dotSize))
+	#xs = int(math.ceil((L2[0] - L1[0])/dotSize))
+	#ys = int(math.ceil((L2[1] - L1[1])/dotSize))
+	xs = L2[0] - L1[0]
+	ys = L2[1] - L1[1]
 
 	# ﾎﾞｰﾄﾞｻｲｽﾞのｲﾒｰｼﾞを生成
-	return Image.new('L',(xs,ys))
+	#return Image.new('L',(xs,ys))
+	return Image.new('RGB',(xs,ys), colors['BoardShape'].rgb)
 
 
-def group_print(groupName):
+def group_print(groupName, fileName):
+	u'''
+		ｸﾞﾙｰﾌﾟに含まれるﾚｲﾔｰのﾋﾞｯﾄﾏｯﾌﾟを作成する
+	'''
 
 	print '----', groupName, '----'
 	layers = layer_group[groupName]
@@ -810,34 +918,64 @@ def group_print(groupName):
 	for ly in layers:
 		print ly.name
 		for obj in ly.items_:
-			#print '   {0}:({1},{2})'.format(obj.name,obj.attribute['x'],obj.attribute['y'])
-			print '   {0}::{1}=({2},{3})'.format(type(obj).__name__, obj.name,obj.attribute['x'],obj.attribute['y'])
-			polygon = map(lambda arg:(arg[0],img.size[1]-arg[1]),obj.polygon())
-			print polygon
-			drw.polygon( polygon ,255)
+			if obj.attribute.has_key('x') == True:
+				print '   {0}::{1}=({2},{3})'.format(type(obj).__name__, obj.name,obj.attribute['x'],obj.attribute['y'])
+			else:
+				print '   {0}::{1}'.format(type(obj).__name__, obj.name)
 
-	img.save('f:\\aa.png')
+			polygonData = obj.polygon()
+			print polygonData
+
+			col = colors[ly.name].rgb
+			if polygonData[0] == 'Polygon' or polygonData[0] == 'RectRound':
+				polygon = map(lambda arg:(arg[0],img.size[1]-arg[1]),polygonData[1])
+				drw.polygon( polygon ,col)
+				#drw.polygon( polygon ,255)
+			elif polygonData[0] == 'Circle':
+				rr = polygonData[1]	
+				x1 = rr[0][0] - (rr[1][0]/2)
+				x2 = rr[0][0] + (rr[1][0]/2)
+				y1 = img.size[1] - (rr[0][1] - (rr[1][1]/2))
+				y2 = img.size[1] - (rr[0][1] + (rr[1][1]/2))
+				drw.ellipse([x1,y1,x2,y2],fill=(0,0,0))
+			elif polygonData[0] == 'Polyline':
+				lw = int( round(float(obj.attribute['lineWidth'])/dotSize) )
+				pos = map(lambda arg:(arg[0],img.size[1]-arg[1]),polygonData[1])
+				pp = [pos[0],pos[1]]
+				for p2 in pos[2:]:
+					drw.line(pp,col,width=lw)
+					pp[0] = pp[1]
+					pp[1] = p2
+				drw.line(pp,col,width=lw)
+
+			elif polygonData[0] == 'Line':
+				lw = int( round(float(obj.attribute['lineWidth'])/dotSize) )
+				pos = map(lambda arg:(arg[0],img.size[1]-arg[1]),polygonData[1])
+				drw.line(pos,col,width=lw)
+
+			elif polygonData[0] == 'None':
+				pass
+
+	#ﾌｧｲﾙ保存
+	img.save(fileName)
 
 def test():
 	load_xml('f:\\mockup2016_A.xml')
 	convert()
 
-	layer_list()
+	#layer_list()
 
-	#group_print('Conductor-7Group')
-	#group_print('Conductor-6Group')
-	#group_print('Conductor-5Group')
-	#group_print('Conductor-4Group')
-	#group_print('Conductor-3Group')
-	group_print('Conductor-2Group')
-	#group_print('Conductor-1Group')
-
-	#img = create_board_image()
+	#group_print('Conductor-7Group', 'f:\\g7.png')
+	group_print('Conductor-6Group', 'f:\\g6.png')
+	group_print('Conductor-5Group', 'f:\\g5.png')
+	group_print('Conductor-4Group', 'f:\\g4.png')
+	group_print('Conductor-3Group', 'f:\\g3.png')
+	group_print('Conductor-2Group', 'f:\\g2.png')
+	group_print('Conductor-1Group', 'f:\\g1.png')
 
 	#ﾋﾟｸｾﾙ指定で書き込み
 	#pix = img.load()
 	#pix[0,0] = 255
-
 
 ##########################################################
 
